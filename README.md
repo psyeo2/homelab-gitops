@@ -26,10 +26,12 @@ Current child apps:
   - Argo CD `Application` CRs only.
 - `clusters/prodesks/infra`:
   - Platform services and cluster-level dependencies.
-  - Includes Longhorn (`infra/storage/longhorn.yaml`) and placeholders for `cert-manager`, `traefik`, `postgres`, and `redis`.
+  - Includes Longhorn (`infra/storage/longhorn.yaml`) plus platform networking/load-balancer resources.
   - Includes shared networking resources (`infra/networking`).
 - `clusters/prodesks/apps`:
-  - User-facing workloads.
+  - Application workloads split by role:
+  - `apps/services`: shared internal dependencies (postgres, redis, ddns, etc.).
+  - `apps/user`: user-facing apps and user utilities (immich, game servers, wireguard, etc.).
 
 ## One-time setup
 
@@ -80,3 +82,12 @@ Before syncing, make sure each node has Longhorn prerequisites installed (notabl
 
 Important for k3s:
 - Disable built-in `servicelb` when using MetalLB as the load balancer controller to avoid conflicts.
+
+## Cloudflare DDNS
+
+- Managed in:
+  - `clusters/prodesks/apps/services/cloudflare-ddns`
+- Purpose:
+  - Keep `ddns.diakonos.uk` (or your chosen host) updated to your current WAN/public IP.
+- Notes:
+  - This is separate from MetalLB VIPs (`192.168.1.x`) used inside your LAN.
