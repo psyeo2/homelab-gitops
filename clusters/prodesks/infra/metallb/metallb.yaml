@@ -10,12 +10,19 @@ spec:
   source:
     repoURL: https://metallb.github.io/metallb
     chart: metallb
-    targetRevision: 0.14.x
+    targetRevision: 0.15.x
     helm:
       releaseName: metallb
   destination:
     name: in-cluster
     namespace: metallb-system
+  ignoreDifferences:
+    - group: apiextensions.k8s.io
+      kind: CustomResourceDefinition
+      name: bgppeers.metallb.io
+      jsonPointers:
+        - /status
+        - /spec/conversion/webhook/clientConfig/caBundle
   syncPolicy:
     automated:
       prune: true
