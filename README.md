@@ -56,17 +56,15 @@ After that, new apps/resources only need Git commits.
 
 Before syncing, make sure each node has Longhorn prerequisites installed (notably `open-iscsi`/`iscsiadm`) and running.
 
-## Ingress (Traefik)
+## UI Access (LAN VIP)
 
-- For k3s, Traefik is a sensible default ingress controller.
-- `ingress-nginx` is still actively maintained, but running both usually adds unnecessary complexity for homelab setups.
-- This repo includes UI ingresses for:
-  - Longhorn: `longhorn.prodesks.lan`
-  - Argo CD: `argocd.prodesks.lan`
+- This repo exposes UI services directly via a shared MetalLB VIP:
+  - Argo CD: `https://192.168.1.50:8080`
+  - Longhorn: `http://192.168.1.50:8081`
 - Manifests:
-  - `clusters/prodesks/infra/networking/longhorn-ui-ingress.yaml`
-  - `clusters/prodesks/infra/networking/argocd-ui-ingress.yaml`
-- To access from your LAN, create local DNS/hosts entries for both hosts to any k3s node IP that serves Traefik on port `80`.
+  - `clusters/prodesks/infra/networking/argocd-ui-lb.yaml`
+  - `clusters/prodesks/infra/networking/longhorn-ui-lb.yaml`
+- Both services share the same VIP using `metallb.io/allow-shared-ip`.
 
 ## LoadBalancer IP (MetalLB)
 
