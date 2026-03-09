@@ -3,3 +3,6 @@ kind: Kustomization
 resources:
   - namespaces
   - storage/longhorn.yaml
+  - metallb/metallb.yaml
+  - metallb/metallb-config.yaml
+  - networking

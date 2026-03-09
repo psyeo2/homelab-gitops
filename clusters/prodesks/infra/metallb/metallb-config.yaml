@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-metallb-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "40"
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:psyeo2/homelab-gitops.git
+    targetRevision: main
+    path: clusters/prodesks/infra/metallb/metallb-config
+  destination:
+    name: in-cluster
+    namespace: metallb-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

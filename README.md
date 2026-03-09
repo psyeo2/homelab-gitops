@@ -26,7 +26,8 @@ Current child apps:
   - Argo CD `Application` CRs only.
 - `clusters/prodesks/infra`:
   - Platform services and cluster-level dependencies.
-  - Includes Longhorn (`infra/storage/longhorn.yaml`) and placeholders for `cert-manager`, `ingress-nginx`, `postgres`, and `redis`.
+  - Includes Longhorn (`infra/storage/longhorn.yaml`) and placeholders for `cert-manager`, `traefik`, `postgres`, and `redis`.
+  - Includes shared networking resources (`infra/networking`).
 - `clusters/prodesks/apps`:
   - User-facing workloads.
 
@@ -54,3 +55,30 @@ After that, new apps/resources only need Git commits.
 - Sync ordering is set so `prodesks-infra` runs before `prodesks-apps`.
 
 Before syncing, make sure each node has Longhorn prerequisites installed (notably `open-iscsi`/`iscsiadm`) and running.
+
+## Ingress (Traefik)
+
+- For k3s, Traefik is a sensible default ingress controller.
+- `ingress-nginx` is still actively maintained, but running both usually adds unnecessary complexity for homelab setups.
+- This repo includes UI ingresses for:
+  - Longhorn: `longhorn.prodesks.lan`
+  - Argo CD: `argocd.prodesks.lan`
+- Manifests:
+  - `clusters/prodesks/infra/networking/longhorn-ui-ingress.yaml`
+  - `clusters/prodesks/infra/networking/argocd-ui-ingress.yaml`
+- To access from your LAN, create local DNS/hosts entries for both hosts to any k3s node IP that serves Traefik on port `80`.
+
+## LoadBalancer IP (MetalLB)
+
+- MetalLB is managed by:
+  - `clusters/prodesks/infra/metallb/metallb.yaml`
+  - `clusters/prodesks/infra/metallb/metallb-config.yaml`
+- Config path:
+  - `clusters/prodesks/infra/metallb/metallb-config`
+- Current LAN pool:
+  - `192.168.1.50-192.168.1.59`
+- Traefik is pinned to VIP:
+  - `192.168.1.50` via `metallb.io/loadBalancerIPs` annotation.
+
+Important for k3s:
+- Disable built-in `servicelb` when using MetalLB as the load balancer controller to avoid conflicts.
