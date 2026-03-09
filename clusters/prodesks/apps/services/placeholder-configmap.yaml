@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: services-placeholder
+  namespace: apps
+data:
+  note: Place shared internal workloads here (e.g. postgres, redis, wireguard).

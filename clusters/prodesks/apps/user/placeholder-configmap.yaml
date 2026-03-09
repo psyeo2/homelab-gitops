@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-placeholder
+  namespace: apps
+data:
+  note: Place user facing apps here (e.g. immich, game servers, media).
