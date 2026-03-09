@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: apps-placeholder
+  namespace: apps
+data:
+  note: Remove this file when you add your first real user-facing app.
