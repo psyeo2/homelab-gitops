@@ -4,3 +4,4 @@ resources:
   - argocd-managed.yaml
   - apps.yaml
   - infra.yaml
+  - longhorn-system.yaml
