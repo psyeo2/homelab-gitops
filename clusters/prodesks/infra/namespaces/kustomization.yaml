@@ -5,3 +5,4 @@ resources:
   - apps.yaml
   - infra.yaml
   - longhorn-system.yaml
+  - metallb-system.yaml
