@@ -22,6 +22,7 @@ spec:
         csi:
           kubeletRootDir: /var/lib/kubelet
         defaultSettings:
+          kubeletRootDir: /var/lib/kubelet
           defaultDataPath: /var/lib/longhorn
   destination:
     name: in-cluster
