@@ -6,3 +6,4 @@ resources:
   - infra.yaml
   - longhorn-system.yaml
   - metallb-system.yaml
+  - sealed-secrets.yaml

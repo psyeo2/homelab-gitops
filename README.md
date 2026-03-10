@@ -83,6 +83,14 @@ Before syncing, make sure each node has Longhorn prerequisites installed (notabl
 Important for k3s:
 - Disable built-in `servicelb` when using MetalLB as the load balancer controller to avoid conflicts.
 
+## Sealed Secrets
+
+- Controller is managed by:
+  - `clusters/prodesks/infra/sealed-secrets/sealed-secrets.yaml`
+- Namespace:
+  - `sealed-secrets`
+- Use SealedSecrets for API keys and app credentials so plaintext secrets are never committed to Git.
+
 ## Cloudflare DDNS
 
 - Managed in:
