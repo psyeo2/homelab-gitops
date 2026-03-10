@@ -33,7 +33,7 @@ spec:
               metallb.io/allow-shared-ip: ui-vip
         persistence:
           volumeClaimSpec:
-            storageClassName: longhorn-wffc
+            storageClassName: longhorn
             accessModes:
               - ReadWriteOnce
             resources:
