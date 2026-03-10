@@ -35,8 +35,10 @@ spec:
         # Example: WG_HOST=your.public.ip.or.dns
         extraEnvVars:
           env:
-            WG_HOST: "ddns.7marketplace.uk"
-            WG_PORT: "51820"
+            - name: WG_HOST
+              value: "ddns.7marketplace.uk"
+            - name: WG_PORT
+              value: "51820"
   destination:
     name: in-cluster
     namespace: wireguard
