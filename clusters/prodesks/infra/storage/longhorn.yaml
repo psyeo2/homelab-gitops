@@ -20,10 +20,10 @@ spec:
           defaultClass: true
           defaultClassReplicaCount: 2
         csi:
-          kubeletRootDir: /var/lib/kubelet
+          kubeletRootDir: /var/lib/rancher/k3s/agent/kubelet
         defaultSettings:
-          kubeletRootDir: /var/lib/kubelet
           defaultDataPath: /var/lib/longhorn
+          defaultReplicaCount: 2
   destination:
     name: in-cluster
     namespace: longhorn-system
