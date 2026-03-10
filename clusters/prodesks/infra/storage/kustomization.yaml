@@ -3,4 +3,12 @@ kind: Kustomization
 resources:
   - longhorn.yaml
   - longhorn-storage-class.yaml
-  - patch-local-path.yaml
+patches:
+  - path: patch-local-path.yaml
+    target:
+      kind: StorageClass
+      name: local-path
+  - path: patch-longhorn-default.yaml
+    target:
+      kind: StorageClass
+      name: longhorn
