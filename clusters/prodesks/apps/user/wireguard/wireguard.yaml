@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-wireguard
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
+spec:
+  project: default
+  source:
+    repoURL: https://helm-charts.rm3l.org
+    chart: wg-easy
+    targetRevision: 0.2.x
+    helm:
+      releaseName: wireguard
+      values: |
+        replicaCount: 1
+        image:
+          tag: "15"
+        services:
+          wireguard:
+            type: LoadBalancer
+            port: 51820
+            loadBalancerIP: 192.168.1.52
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.52
+          http:
+            type: ClusterIP
+            port: 51821
+        persistence:
+          enabled: true
+          storageClassName: longhorn
+          size: 10Gi
+        # Set this to your public endpoint (IP or DNS) before onboarding clients.
+        # Example: WG_HOST=your.public.ip.or.dns
+        extraEnvVars:
+          env:
+            WG_HOST: "ddns.7marketplace.uk"
+            WG_PORT: "51820"
+  destination:
+    name: in-cluster
+    namespace: wireguard
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
