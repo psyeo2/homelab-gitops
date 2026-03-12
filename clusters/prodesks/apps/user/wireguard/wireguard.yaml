@@ -17,19 +17,17 @@ spec:
         replicaCount: 1
         image:
           tag: "15"
+        deploymentStrategy:
+          type: Recreate
         services:
           wireguard:
             type: LoadBalancer
             port: 51820
             loadBalancerIP: 192.168.1.51
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.51
           http:
             type: LoadBalancer
             port: 51821
             loadBalancerIP: 192.168.1.50
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.50
         persistence:
           enabled: true
           volumeClaimSpec:
@@ -40,13 +38,12 @@ spec:
               requests:
                 storage: 10Gi
         extraEnvVars:
-          env:
-            - name: WG_HOST
-              value: "ddns.7marketplace.uk"
-            - name: WG_PORT
-              value: "51820"
-            - name: INSECURE
-              value: "true"
+          - name: WG_HOST
+            value: "ddns.7marketplace.uk"
+          - name: WG_PORT
+            value: "51820"
+          - name: INSECURE
+            value: "true"
   destination:
     name: in-cluster
     namespace: wireguard
