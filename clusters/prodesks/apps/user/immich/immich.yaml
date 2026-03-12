@@ -34,17 +34,19 @@ spec:
                         name: immich-psql-password
                         key: IMMICH_PW
                   DB_DATABASE_NAME: immich_db
+                  UPLOAD_LOCATION: /data
+        persistence:
+          library:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: immich-library
+            globalMounts:
+              - path: /data
         valkey:
           enabled: true
         machine-learning:
           enabled: false
         server:
-          persistence:
-            data:
-              enabled: true
-              existingClaim: immich-library
-              globalMounts:
-                - path: /data
           service:
             main:
               type: LoadBalancer
