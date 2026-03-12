@@ -19,6 +19,8 @@ spec:
         immich:
           persistence:
             library:
+              enabled: true
+              type: persistentVolumeClaim
               existingClaim: immich-library
         controllers:
           main:
@@ -34,14 +36,6 @@ spec:
                         name: immich-psql-password
                         key: IMMICH_PW
                   DB_DATABASE_NAME: immich_db
-                  UPLOAD_LOCATION: /data
-        persistence:
-          library:
-            enabled: true
-            type: persistentVolumeClaim
-            existingClaim: immich-library
-            globalMounts:
-              - path: /data
         valkey:
           enabled: true
         machine-learning:
