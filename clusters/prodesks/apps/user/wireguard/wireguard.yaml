@@ -38,12 +38,13 @@ spec:
               requests:
                 storage: 10Gi
         extraEnvVars:
-          - name: WG_HOST
-            value: "ddns.7marketplace.uk"
-          - name: WG_PORT
-            value: "51820"
-          - name: INSECURE
-            value: "true"
+          env:
+            - name: WG_HOST
+              value: "ddns.7marketplace.uk"
+            - name: WG_PORT
+              value: "51820"
+            - name: INSECURE
+              value: "true"
   destination:
     name: in-cluster
     namespace: wireguard
