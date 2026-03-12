@@ -46,6 +46,8 @@ spec:
               value: "ddns.7marketplace.uk"
             - name: WG_PORT
               value: "51820"
+            - name: INSECURE
+              value: "true"
   destination:
     name: in-cluster
     namespace: wireguard
