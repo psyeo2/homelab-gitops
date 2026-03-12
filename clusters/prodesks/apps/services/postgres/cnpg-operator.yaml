@@ -13,6 +13,9 @@ spec:
     targetRevision: 0.26.1
     helm:
       releaseName: cloudnative-pg
+      values: |
+        crds:
+          create: true
   destination:
     name: in-cluster
     namespace: cnpg-system
