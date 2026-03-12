@@ -39,6 +39,12 @@ spec:
         machine-learning:
           enabled: false
         server:
+          persistence:
+            data:
+              enabled: true
+              existingClaim: immich-library
+              globalMounts:
+                - path: /data
           service:
             main:
               type: LoadBalancer
