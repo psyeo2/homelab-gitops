@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-immich
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://immich-app.github.io/immich-charts
+    chart: immich
+    targetRevision: 0.10.3
+    helm:
+      releaseName: immich
+      values: |
+        image:
+          tag: v1.133.0
+        immich:
+          persistence:
+            library:
+              existingClaim: immich-library
+        controllers:
+          main:
+            containers:
+              main:
+                env:
+                  DB_HOSTNAME: prodesks-postgres-rw.apps.svc.cluster.local
+                  DB_PORT: "5432"
+                  DB_USERNAME: immich_user
+                  DB_PASSWORD:
+                    valueFrom:
+                      secretKeyRef:
+                        name: immich-psql-password
+                        key: IMMICH_PW
+                  DB_DATABASE_NAME: immich_db
+        valkey:
+          enabled: true
+        machine-learning:
+          enabled: false
+        server:
+          service:
+            main:
+              type: LoadBalancer
+              loadBalancerIP: 192.168.1.54
+              annotations:
+                metallb.io/loadBalancerIPs: 192.168.1.54
+              ports:
+                http:
+                  port: 2283
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
