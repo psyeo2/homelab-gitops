@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: immich-external-media
+  namespace: apps
+  annotations:
+    argocd.argoproj.io/sync-wave: "16"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 12000Gi
+  storageClassName: immich-external-media-nfs
+  volumeName: immich-external-media-nfs-pv

@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
   - immich-library-pv.yaml
   - immich-library-pvc.yaml
+  - immich-external-media-pv.yaml
+  - immich-external-media-pvc.yaml
   - sealedsecret.yaml
   - immich.yaml
