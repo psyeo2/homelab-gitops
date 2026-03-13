@@ -7,31 +7,57 @@ data:
   settings.yaml: |
     title: Prodesks Homelab
     description: Homelab service dashboard
+    target: _self
+    useEqualHeights: true
+    fullWidth: true
+    layout:
+      Infrastructure:
+        style: row
+        columns: 3
+      Applications:
+        style: row
+        columns: 3
   bookmarks.yaml: |
     []
   widgets.yaml: |
-    []
-  docker.yaml: ""
+    - search:
+        provider: duckduckgo
+        target: _blank
+    - datetime:
+        text_size: xl
+        format:
+          dateStyle: short
+          timeStyle: short
+          hourCycle: h23
+  docker.yaml: |
+    {}
   custom.css: ""
   custom.js: ""
   kubernetes.yaml: |
     mode: disabled
+  proxmox.yaml: |
+    {}
   services.yaml: |
     - Infrastructure:
         - Argo CD:
+            icon: argocd.png
             href: http://192.168.1.50:8080
             description: GitOps control plane
         - Longhorn:
+            icon: longhorn.png
             href: http://192.168.1.50:8081
             description: Storage management
         - WireGuard:
+            icon: wg-easy.png
             href: http://192.168.1.51:51821
             description: VPN administration
         - Grafana:
+            icon: grafana.png
             href: http://192.168.1.50:3000
             description: Metrics dashboards
     - Applications:
         - Immich:
+            icon: immich.png
             href: http://192.168.1.54:2283
             description: Photo and video library
 ---
@@ -62,9 +88,33 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /app/config
-              readOnly: true
-            - name: logs
-              mountPath: /app/config/logs
+            - name: homepage-config
+              mountPath: /app/config/settings.yaml
+              subPath: settings.yaml
+            - name: homepage-config
+              mountPath: /app/config/bookmarks.yaml
+              subPath: bookmarks.yaml
+            - name: homepage-config
+              mountPath: /app/config/widgets.yaml
+              subPath: widgets.yaml
+            - name: homepage-config
+              mountPath: /app/config/docker.yaml
+              subPath: docker.yaml
+            - name: homepage-config
+              mountPath: /app/config/custom.css
+              subPath: custom.css
+            - name: homepage-config
+              mountPath: /app/config/custom.js
+              subPath: custom.js
+            - name: homepage-config
+              mountPath: /app/config/kubernetes.yaml
+              subPath: kubernetes.yaml
+            - name: homepage-config
+              mountPath: /app/config/proxmox.yaml
+              subPath: proxmox.yaml
+            - name: homepage-config
+              mountPath: /app/config/services.yaml
+              subPath: services.yaml
           startupProbe:
             tcpSocket:
               port: http
@@ -82,10 +132,10 @@ spec:
             periodSeconds: 10
       volumes:
         - name: config
+          emptyDir: {}
+        - name: homepage-config
           configMap:
             name: homepage-config
-        - name: logs
-          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
