@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - wireguard/wireguard.yaml
   - immich
-  - grafana
