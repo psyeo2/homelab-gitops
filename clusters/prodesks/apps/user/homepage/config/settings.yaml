@@ -2,7 +2,6 @@ title: Prodesks Homelab
 description: Homelab service dashboard
 target: _self
 useEqualHeights: true
-fullWidth: true
 quicklaunch:
   provider: google
 layout:
