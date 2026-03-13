@@ -1,1 +1,12 @@
+main {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
 
+@media (min-width: 1800px) {
+  main {
+    max-width: 1600px;
+  }
+}

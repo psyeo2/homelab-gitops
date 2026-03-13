@@ -17,6 +17,10 @@
             icon: immich.png
             href: http://192.168.1.54:2283
             description: Photo and video library
+        - WireGuard:
+            icon: wireguard.png
+            href: http://192.168.1.51:51821
+            description: VPN administration
     - Infra:
         - Grafana:
             icon: grafana.png
@@ -26,7 +30,3 @@
             icon: longhorn.png
             href: http://192.168.1.50:8081
             description: Storage management
-        - WireGuard:
-            icon: wireguard.png
-            href: http://192.168.1.51:51821
-            description: VPN administration

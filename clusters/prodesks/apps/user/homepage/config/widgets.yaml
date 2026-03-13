@@ -1,3 +1,6 @@
+- greeting:
+    text_size: xl
+    text: Hello, Eoin
 - search:
     provider: google
     target: _blank
