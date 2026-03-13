@@ -1,0 +1,11 @@
+- search:
+    provider: google
+    target: _blank
+    focus: true
+    showSearchSuggestions: true
+- datetime:
+    text_size: xl
+    format:
+      dateStyle: short
+      timeStyle: short
+      hourCycle: h23

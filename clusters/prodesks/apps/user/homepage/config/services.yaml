@@ -1,0 +1,32 @@
+- Hardware Management:
+    - Argo CD:
+        icon: argo-cd.png
+        href: http://192.168.1.50:8080
+        description: GitOps control plane
+    - Proxmox:
+        icon: proxmox.png
+        href: https://192.168.1.20:8006
+        description: Hypervisor management
+    - UNAS:
+        icon: truenas.png
+        href: http://192.168.1.165
+        description: NAS management
+- Cluster:
+    - Apps:
+        - Immich:
+            icon: immich.png
+            href: http://192.168.1.54:2283
+            description: Photo and video library
+    - Infra:
+        - Grafana:
+            icon: grafana.png
+            href: http://192.168.1.50:3000
+            description: Metrics dashboards
+        - Longhorn:
+            icon: longhorn.png
+            href: http://192.168.1.50:8081
+            description: Storage management
+        - WireGuard:
+            icon: wireguard.png
+            href: http://192.168.1.51:51821
+            description: VPN administration

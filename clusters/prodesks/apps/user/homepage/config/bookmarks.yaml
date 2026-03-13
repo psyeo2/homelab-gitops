@@ -1,0 +1,16 @@
+- Bookmarks:
+    - Gmail:
+        - icon: gmail.png
+          href: https://mail.google.com/
+    - YouTube:
+        - icon: youtube.png
+          href: https://www.youtube.com/
+    - Amazon:
+        - icon: amazon.png
+          href: https://www.amazon.co.uk/
+    - Reddit:
+        - icon: reddit.png
+          href: https://www.reddit.com/
+    - ChatGPT:
+        - icon: chatgpt.png
+          href: https://chatgpt.com/
