@@ -1,0 +1,94 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: homepage-config
+  namespace: apps
+data:
+  settings.yaml: |
+    title: Prodesks Homelab
+    description: Homelab service dashboard
+  kubernetes.yaml: |
+    mode: disabled
+  services.yaml: |
+    - Infrastructure:
+        - Argo CD:
+            href: http://192.168.1.50:8080
+            description: GitOps control plane
+        - Longhorn:
+            href: http://192.168.1.50:8081
+            description: Storage management
+        - WireGuard:
+            href: http://192.168.1.51:51821
+            description: VPN administration
+        - Grafana:
+            href: http://192.168.1.50:3000
+            description: Metrics dashboards
+    - Applications:
+        - Immich:
+            href: http://192.168.1.54:2283
+            description: Photo and video library
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homepage
+  namespace: apps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: homepage
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: homepage
+    spec:
+      containers:
+        - name: homepage
+          image: ghcr.io/gethomepage/homepage:v1.8.0
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: HOMEPAGE_ALLOWED_HOSTS
+              value: 192.168.1.50:3001
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+              readOnly: true
+          startupProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          readinessProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 3
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: http
+            failureThreshold: 3
+            periodSeconds: 10
+      volumes:
+        - name: config
+          configMap:
+            name: homepage-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: homepage
+  namespace: apps
+  annotations:
+    metallb.io/loadBalancerIPs: 192.168.1.50
+    metallb.io/allow-shared-ip: ui-vip
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: homepage
+  ports:
+    - name: http
+      port: 3001
+      targetPort: http
