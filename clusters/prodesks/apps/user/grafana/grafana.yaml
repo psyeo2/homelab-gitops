@@ -12,7 +12,7 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 82.10.1
     helm:
-      skipCrds: false
+      skipCrds: true
       releaseName: grafana
       values: |
         crds:
@@ -69,6 +69,11 @@ spec:
                       - 192.168.1.161:9400
                     labels:
                       node: ubuntu-vm-gpu
+  ignoreDifferences:
+    - group: monitoring.coreos.com
+      kind: Prometheus
+      managedFieldsManagers:
+        - prometheus-operator
   destination:
     name: in-cluster
     namespace: apps

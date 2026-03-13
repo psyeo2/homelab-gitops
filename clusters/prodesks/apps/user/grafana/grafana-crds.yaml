@@ -14,11 +14,21 @@ spec:
     helm:
       releaseName: grafana-crds
       values: |
+        crds:
+          enabled: true
+        defaultRules:
+          create: false
         grafana:
           enabled: false
         prometheus:
           enabled: false
         alertmanager:
+          enabled: false
+        kube-state-metrics:
+          enabled: false
+        prometheus-node-exporter:
+          enabled: false
+        prometheusOperator:
           enabled: false
   destination:
     name: in-cluster
