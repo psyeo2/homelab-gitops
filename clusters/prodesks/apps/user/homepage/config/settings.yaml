@@ -8,6 +8,9 @@ layout:
   Hardware Management:
     style: row
     columns: 3
+  VM Services:
+    style: row
+    columns: 3
   Cluster:
     style: row
     columns: 3

@@ -11,6 +11,11 @@
         icon: truenas.png
         href: http://192.168.1.165
         description: NAS management
+- VM Services:
+    - Jellyfin:
+        icon: jellyfin.png
+        href: http://192.168.1.161:8096
+        description: Media server on Diakonos Ubuntu VM
 - Cluster:
     - Apps:
         - Immich:
