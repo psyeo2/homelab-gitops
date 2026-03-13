@@ -12,8 +12,11 @@ spec:
     chart: kube-prometheus-stack
     targetRevision: 82.10.1
     helm:
+      skipCrds: true
       releaseName: grafana
       values: |
+        crds:
+          enabled: false
         alertmanager:
           enabled: false
         grafana:
@@ -75,3 +78,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - SkipDryRunOnMissingResource=true

@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-grafana-crds
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "29"
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: prometheus-operator-crds
+    targetRevision: 27.0.0
+    helm:
+      releaseName: grafana-crds
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
