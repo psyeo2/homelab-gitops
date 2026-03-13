@@ -7,6 +7,13 @@ data:
   settings.yaml: |
     title: Prodesks Homelab
     description: Homelab service dashboard
+  bookmarks.yaml: |
+    []
+  widgets.yaml: |
+    []
+  docker.yaml: ""
+  custom.css: ""
+  custom.js: ""
   kubernetes.yaml: |
     mode: disabled
   services.yaml: |
@@ -56,6 +63,8 @@ spec:
             - name: config
               mountPath: /app/config
               readOnly: true
+            - name: logs
+              mountPath: /app/config/logs
           startupProbe:
             tcpSocket:
               port: http
@@ -75,6 +84,8 @@ spec:
         - name: config
           configMap:
             name: homepage-config
+        - name: logs
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
