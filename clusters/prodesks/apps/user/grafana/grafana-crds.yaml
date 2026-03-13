@@ -24,6 +24,10 @@ spec:
           enabled: false
         alertmanager:
           enabled: false
+        kubeStateMetrics:
+          enabled: false
+        nodeExporter:
+          enabled: false
         kube-state-metrics:
           enabled: false
         prometheus-node-exporter:
