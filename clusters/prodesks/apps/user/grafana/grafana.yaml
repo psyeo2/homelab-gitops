@@ -51,6 +51,17 @@ spec:
             type: ClusterIP
           prometheusSpec:
             retention: 15d
+            walCompression: true
+            containers:
+              - name: prometheus
+                startupProbe:
+                  failureThreshold: 60
+                  periodSeconds: 15
+                  timeoutSeconds: 3
+                readinessProbe:
+                  failureThreshold: 10
+                livenessProbe:
+                  failureThreshold: 10
             storageSpec:
               volumeClaimTemplate:
                 spec:
