@@ -22,21 +22,17 @@ spec:
               enabled: true
               type: persistentVolumeClaim
               existingClaim: immich-library
-        controllers:
-          main:
-            containers:
-              main:
-                env:
-                  DB_HOSTNAME: prodesks-postgres-rw.apps.svc.cluster.local
-                  DB_PORT: "5432"
-                  DB_USERNAME: immich_user
-                  DB_PASSWORD:
-                    valueFrom:
-                      secretKeyRef:
-                        name: immich-psql-password
-                        key: IMMICH_PW
-                  DB_DATABASE_NAME: immich_db
-                  UPLOAD_LOCATION: /data/immich
+        env:
+          DB_HOSTNAME: prodesks-postgres-rw.apps.svc.cluster.local
+          DB_PORT: "5432"
+          DB_USERNAME: immich_user
+          DB_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: immich-psql-password
+                key: IMMICH_PW
+          DB_DATABASE_NAME: immich_db
+          UPLOAD_LOCATION: /data/immich
         valkey:
           enabled: true
         machine-learning:
