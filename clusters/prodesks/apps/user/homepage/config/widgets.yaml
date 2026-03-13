@@ -1,6 +1,13 @@
 - greeting:
     text_size: xl
     text: Hello, Eoin
+- openmeteo:
+    label: Marshfield
+    latitude: 51.462
+    longitude: -2.319
+    timezone: Europe/London
+    units: metric
+    cache: 10
 - search:
     provider: google
     target: _blank
