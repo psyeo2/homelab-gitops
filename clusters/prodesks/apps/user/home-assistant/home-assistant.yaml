@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-home-assistant
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://pajikos.github.io/home-assistant-helm-chart
+    chart: home-assistant
+    targetRevision: 0.3.47
+    helm:
+      releaseName: home-assistant
+      values: |
+        service:
+          type: LoadBalancer
+          port: 8123
+          annotations:
+            metallb.io/loadBalancerIPs: 192.168.1.50
+            metallb.io/allow-shared-ip: ui-vip
+        ingress:
+          enabled: false
+        persistence:
+          enabled: true
+          storageClass: longhorn
+          size: 10Gi
+          accessMode: ReadWriteOnce
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

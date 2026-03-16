@@ -22,6 +22,10 @@
             icon: immich.png
             href: http://192.168.1.54:2283
             description: Photo and video library
+        - Home Assistant:
+            icon: home-assistant.png
+            href: http://192.168.1.50:8123
+            description: Smart home automation
         - WireGuard:
             icon: wireguard.png
             href: http://192.168.1.51:51821
