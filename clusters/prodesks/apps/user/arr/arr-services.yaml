@@ -55,16 +55,6 @@ spec:
                   TZ: Europe/London
                   PUID: 1000
                   PGID: 1000
-          prowlarr:
-            containers:
-              main:
-                image:
-                  repository: lscr.io/linuxserver/prowlarr
-                  tag: latest
-                env:
-                  TZ: Europe/London
-                  PUID: 1000
-                  PGID: 1000
           jellyseerr:
             containers:
               main:
@@ -115,16 +105,6 @@ spec:
               http:
                 port: 6767
                 targetPort: 6767
-          prowlarr:
-            controller: prowlarr
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.56
-              metallb.io/allow-shared-ip: arr-stack
-            ports:
-              http:
-                port: 9696
-                targetPort: 9696
           jellyseerr:
             controller: jellyseerr
             type: LoadBalancer
@@ -172,14 +152,6 @@ spec:
             existingClaim: bazarr-config
             advancedMounts:
               bazarr:
-                main:
-                  - path: /config
-          prowlarr-config:
-            enabled: true
-            type: persistentVolumeClaim
-            existingClaim: prowlarr-config
-            advancedMounts:
-              prowlarr:
                 main:
                   - path: /config
           jellyseerr-config:

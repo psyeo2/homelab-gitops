@@ -32,6 +32,17 @@ spec:
                 securityContext:
                   allowPrivilegeEscalation: false
                   readOnlyRootFilesystem: false
+              prowlarr:
+                image:
+                  repository: lscr.io/linuxserver/prowlarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
               gluetun:
                 image:
                   repository: qmcgaw/gluetun
@@ -81,6 +92,11 @@ spec:
                 port: 6881
                 targetPort: 6881
                 protocol: UDP
+              prowlarr:
+                enabled: true
+                port: 9696
+                targetPort: 9696
+                protocol: TCP
         persistence:
           config:
             enabled: true
@@ -94,6 +110,14 @@ spec:
             existingClaim: jellyfin-media
             globalMounts:
               - path: /data
+          prowlarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: prowlarr-config
+            advancedMounts:
+              main:
+                prowlarr:
+                  - path: /config
           tun:
             enabled: true
             type: hostPath
