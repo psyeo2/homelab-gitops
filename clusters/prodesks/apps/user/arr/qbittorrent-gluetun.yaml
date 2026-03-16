@@ -66,8 +66,7 @@ spec:
             controller: main
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.52
-              metallb.io/allow-shared-ip: arr-vpn
+              metallb.io/loadBalancerIPs: 192.168.1.55
             ports:
               webui:
                 port: 8080

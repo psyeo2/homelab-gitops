@@ -79,7 +79,7 @@ spec:
             controller: sonarr
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/loadBalancerIPs: 192.168.1.56
               metallb.io/allow-shared-ip: arr-stack
             ports:
               http:
@@ -89,7 +89,7 @@ spec:
             controller: radarr
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/loadBalancerIPs: 192.168.1.56
               metallb.io/allow-shared-ip: arr-stack
             ports:
               http:
@@ -99,7 +99,7 @@ spec:
             controller: lidarr
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/loadBalancerIPs: 192.168.1.56
               metallb.io/allow-shared-ip: arr-stack
             ports:
               http:
@@ -109,7 +109,7 @@ spec:
             controller: bazarr
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/loadBalancerIPs: 192.168.1.56
               metallb.io/allow-shared-ip: arr-stack
             ports:
               http:
@@ -119,7 +119,7 @@ spec:
             controller: prowlarr
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/loadBalancerIPs: 192.168.1.56
               metallb.io/allow-shared-ip: arr-stack
             ports:
               http:
@@ -129,7 +129,7 @@ spec:
             controller: jellyseerr
             type: LoadBalancer
             annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/loadBalancerIPs: 192.168.1.56
               metallb.io/allow-shared-ip: arr-stack
             ports:
               http:
