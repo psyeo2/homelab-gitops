@@ -1,0 +1,199 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-arr-services
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://bjw-s-labs.github.io/helm-charts
+    chart: app-template
+    targetRevision: 4.4.0
+    helm:
+      releaseName: arr-services
+      values: |
+        controllers:
+          sonarr:
+            containers:
+              main:
+                image:
+                  repository: lscr.io/linuxserver/sonarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+          radarr:
+            containers:
+              main:
+                image:
+                  repository: lscr.io/linuxserver/radarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+          lidarr:
+            containers:
+              main:
+                image:
+                  repository: lscr.io/linuxserver/lidarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+          bazarr:
+            containers:
+              main:
+                image:
+                  repository: lscr.io/linuxserver/bazarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+          prowlarr:
+            containers:
+              main:
+                image:
+                  repository: lscr.io/linuxserver/prowlarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+          jellyseerr:
+            containers:
+              main:
+                image:
+                  repository: ghcr.io/fallenbagel/jellyseerr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  LOG_LEVEL: info
+        service:
+          sonarr:
+            controller: sonarr
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/allow-shared-ip: arr-stack
+            ports:
+              http:
+                port: 8989
+                targetPort: 8989
+          radarr:
+            controller: radarr
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/allow-shared-ip: arr-stack
+            ports:
+              http:
+                port: 7878
+                targetPort: 7878
+          lidarr:
+            controller: lidarr
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/allow-shared-ip: arr-stack
+            ports:
+              http:
+                port: 8686
+                targetPort: 8686
+          bazarr:
+            controller: bazarr
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/allow-shared-ip: arr-stack
+            ports:
+              http:
+                port: 6767
+                targetPort: 6767
+          prowlarr:
+            controller: prowlarr
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/allow-shared-ip: arr-stack
+            ports:
+              http:
+                port: 9696
+                targetPort: 9696
+          jellyseerr:
+            controller: jellyseerr
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.53
+              metallb.io/allow-shared-ip: arr-stack
+            ports:
+              http:
+                port: 5055
+                targetPort: 5055
+        persistence:
+          media:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: jellyfin-media
+            globalMounts:
+              - path: /data
+          sonarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: sonarr-config
+            advancedMounts:
+              sonarr:
+                main:
+                  - path: /config
+          radarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: radarr-config
+            advancedMounts:
+              radarr:
+                main:
+                  - path: /config
+          lidarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: lidarr-config
+            advancedMounts:
+              lidarr:
+                main:
+                  - path: /config
+          bazarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: bazarr-config
+            advancedMounts:
+              bazarr:
+                main:
+                  - path: /config
+          prowlarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: prowlarr-config
+            advancedMounts:
+              prowlarr:
+                main:
+                  - path: /config
+          jellyseerr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: jellyseerr-config
+            advancedMounts:
+              jellyseerr:
+                main:
+                  - path: /app/config
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

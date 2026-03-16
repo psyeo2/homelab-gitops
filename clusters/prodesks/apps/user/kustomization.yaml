@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - wireguard/wireguard.yaml
   - immich
+  - arr
   - home-assistant
   - homepage
