@@ -55,6 +55,7 @@ spec:
                   FIREWALL_VPN_INPUT_PORTS: 6881
                   FIREWALL_OUTBOUND_SUBNETS: 192.168.1.0/24,10.42.0.0/16,10.43.0.0/16
                   DOT: "off"
+                  DNS_KEEP_NAMESERVER: "on"
                   SERVER_CITIES: Amsterdam
                   HEALTH_VPN_DURATION_INITIAL: 120s
                   WIREGUARD_PRIVATE_KEY:
