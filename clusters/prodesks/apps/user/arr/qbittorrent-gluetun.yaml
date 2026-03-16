@@ -102,8 +102,10 @@ spec:
             enabled: true
             type: persistentVolumeClaim
             existingClaim: qbittorrent-config
-            globalMounts:
-              - path: /config
+            advancedMounts:
+              main:
+                main:
+                  - path: /config
           media:
             enabled: true
             type: persistentVolumeClaim
