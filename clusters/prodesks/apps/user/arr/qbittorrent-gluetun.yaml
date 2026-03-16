@@ -53,6 +53,7 @@ spec:
                   VPN_TYPE: wireguard
                   FIREWALL: "on"
                   FIREWALL_VPN_INPUT_PORTS: 6881
+                  FIREWALL_OUTBOUND_SUBNETS: 10.42.0.0/16,10.43.0.0/16
                   SERVER_CITIES: Amsterdam
                   HEALTH_VPN_DURATION_INITIAL: 120s
                   WIREGUARD_PRIVATE_KEY:
