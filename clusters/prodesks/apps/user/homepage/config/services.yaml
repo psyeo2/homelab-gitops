@@ -11,6 +11,10 @@
         icon: truenas.png
         href: http://192.168.1.165
         description: NAS management
+    - BT Router:
+        icon: router.png
+        href: https://192.168.1.254
+        description: Router management
 - VM Services:
     - Jellyfin:
         icon: jellyfin.png
