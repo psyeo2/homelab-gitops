@@ -5,7 +5,9 @@
 - Namespace: `apps`
 - Helm chart: `grafana/grafana`
 - Datasource: `Prometheus` at `monitoring-prometheus.monitoring.svc.cluster.local:9090`
-- Dashboard: `Node Exporter Full` (`gnetId: 1860`)
+- Dashboards:
+  - `Node Exporter Full` (`gnetId: 1860`)
+  - `ProDesk + Proxmox + GPU VM Overview` (provisioned from inline JSON)
 
 Admin credentials are stored in the chart-generated secret. After first sync:
 

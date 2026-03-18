@@ -61,6 +61,652 @@ spec:
               gnetId: 1860
               revision: 37
               datasource: Prometheus
+            prodesks-homelab-overview:
+              json: |
+                {
+                  "annotations": {
+                    "list": [
+                      {
+                        "builtIn": 1,
+                        "datasource": {
+                          "type": "grafana",
+                          "uid": "-- Grafana --"
+                        },
+                        "enable": true,
+                        "hide": true,
+                        "iconColor": "rgba(0, 211, 255, 1)",
+                        "name": "Annotations & Alerts",
+                        "type": "dashboard"
+                      }
+                    ]
+                  },
+                  "editable": true,
+                  "fiscalYearStartMonth": 0,
+                  "graphTooltip": 0,
+                  "links": [],
+                  "panels": [
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "red",
+                                "value": null
+                              },
+                              {
+                                "color": "green",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          "unit": "none"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 5,
+                        "w": 6,
+                        "x": 0,
+                        "y": 0
+                      },
+                      "id": 1,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "percentChangeColorMode": "standard",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "showPercentChange": false,
+                        "textMode": "auto",
+                        "wideLayout": true
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "sum(up{job=\"node\"})",
+                          "legendFormat": "__auto",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "ProDesk Nodes Up",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "red",
+                                "value": null
+                              },
+                              {
+                                "color": "green",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          "unit": "none"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 5,
+                        "w": 6,
+                        "x": 6,
+                        "y": 0
+                      },
+                      "id": 2,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "percentChangeColorMode": "standard",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "showPercentChange": false,
+                        "textMode": "auto",
+                        "wideLayout": true
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "sum(up{job=\"external-node-exporter\"})",
+                          "legendFormat": "__auto",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "External Node Exporters Up",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "red",
+                                "value": null
+                              },
+                              {
+                                "color": "green",
+                                "value": 1
+                              }
+                            ]
+                          },
+                          "unit": "none"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 5,
+                        "w": 6,
+                        "x": 12,
+                        "y": 0
+                      },
+                      "id": 3,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "percentChangeColorMode": "standard",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "showPercentChange": false,
+                        "textMode": "auto",
+                        "wideLayout": true
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "sum(up{job=\"external-dcgm-exporter\"})",
+                          "legendFormat": "__auto",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "GPU Exporters Up",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "red",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 70
+                              },
+                              {
+                                "color": "green",
+                                "value": 85
+                              }
+                            ]
+                          },
+                          "unit": "percentunit"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 5,
+                        "w": 6,
+                        "x": 18,
+                        "y": 0
+                      },
+                      "id": 4,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "percentChangeColorMode": "standard",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "showPercentChange": false,
+                        "textMode": "auto",
+                        "wideLayout": true
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "avg(DCGM_FI_DEV_GPU_UTIL{job=\"external-dcgm-exporter\"}) / 100",
+                          "legendFormat": "__auto",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "GPU Utilization (Avg)",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 5
+                      },
+                      "id": 5,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{job=~\"node|external-node-exporter\", mode=\"idle\"}[5m])) * 100)",
+                          "legendFormat": "{{instance}}",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "CPU Usage by Host",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 85
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 5
+                      },
+                      "id": 6,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "((node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\"} - node_memory_MemAvailable_bytes{job=~\"node|external-node-exporter\"}) / node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\"}) * 100",
+                          "legendFormat": "{{instance}}",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Memory Usage by Host",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 80
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 13
+                      },
+                      "id": 7,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "(DCGM_FI_DEV_FB_USED{job=\"external-dcgm-exporter\"} / (DCGM_FI_DEV_FB_USED{job=\"external-dcgm-exporter\"} + DCGM_FI_DEV_FB_FREE{job=\"external-dcgm-exporter\"})) * 100",
+                          "legendFormat": "GPU {{gpu}}",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "GPU Memory Usage",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "red",
+                                "value": 85
+                              }
+                            ]
+                          },
+                          "unit": "celsius"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 13
+                      },
+                      "id": 8,
+                      "options": {
+                        "legend": {
+                          "calcs": [],
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "DCGM_FI_DEV_GPU_TEMP{job=\"external-dcgm-exporter\"}",
+                          "legendFormat": "GPU {{gpu}}",
+                          "range": true,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "GPU Temperature",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "mappings": [],
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "red",
+                                "value": null
+                              },
+                              {
+                                "color": "green",
+                                "value": 1
+                              }
+                            ]
+                          }
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 10,
+                        "w": 24,
+                        "x": 0,
+                        "y": 21
+                      },
+                      "id": 9,
+                      "options": {
+                        "cellHeight": "sm",
+                        "footer": {
+                          "countRows": false,
+                          "fields": "",
+                          "reducer": [
+                            "sum"
+                          ],
+                          "show": false
+                        },
+                        "showHeader": true
+                      },
+                      "pluginVersion": "11.2.2",
+                      "targets": [
+                        {
+                          "datasource": {
+                            "type": "prometheus",
+                            "uid": "Prometheus"
+                          },
+                          "editorMode": "code",
+                          "expr": "up{job=~\"node|external-node-exporter|external-dcgm-exporter\"}",
+                          "format": "table",
+                          "instant": true,
+                          "legendFormat": "__auto",
+                          "range": false,
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Scrape Target Status",
+                      "type": "table"
+                    }
+                  ],
+                  "refresh": "30s",
+                  "schemaVersion": 39,
+                  "style": "dark",
+                  "tags": [
+                    "homelab",
+                    "infrastructure",
+                    "gpu",
+                    "proxmox"
+                  ],
+                  "templating": {
+                    "list": []
+                  },
+                  "time": {
+                    "from": "now-24h",
+                    "to": "now"
+                  },
+                  "timepicker": {},
+                  "timezone": "",
+                  "title": "ProDesk + Proxmox + GPU VM Overview",
+                  "uid": "prodesks-homelab-overview",
+                  "version": 1,
+                  "weekStart": ""
+                }
   destination:
     name: in-cluster
     namespace: apps

@@ -42,6 +42,22 @@ spec:
             retention: 15d
             scrapeInterval: 30s
             evaluationInterval: 30s
+            additionalScrapeConfigs:
+              - job_name: external-node-exporter
+                static_configs:
+                  - targets:
+                      - 192.168.1.20:9100
+                      - 192.168.1.161:9100
+                      - 192.168.1.165:9100
+                    labels:
+                      site: prodesks-homelab
+              - job_name: external-dcgm-exporter
+                static_configs:
+                  - targets:
+                      - 192.168.1.161:9400
+                    labels:
+                      host: ubuntu-gpu-vm
+                      site: prodesks-homelab
             storageSpec:
               volumeClaimTemplate:
                 spec:
