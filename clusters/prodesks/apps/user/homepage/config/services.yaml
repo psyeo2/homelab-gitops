@@ -2,19 +2,19 @@
     - Immich:
         icon: immich.png
         href: http://192.168.1.54:2283
-        description: Photo and video library on cluster
+        description: Photo and video library
     - Jellyfin:
         icon: jellyfin.png
         href: http://192.168.1.161:8096
-        description: Media server on Diakonos Ubuntu VM
+        description: Media server
     - Jellyseerr:
         icon: jellyseerr.png
         href: http://192.168.1.56:5055
-        description: Media request manager on cluster
+        description: Media request manager
     - Kiwix:
         icon: wikipedia.png
         href: http://192.168.1.50:8082
-        description: Offline ZIM library on cluster
+        description: Offline ZIM library
 - Hardware Management:
     - Argo CD:
         icon: argo-cd.png
@@ -35,52 +35,52 @@
     - Grafana:
         icon: grafana.png
         href: http://192.168.1.50:3000
-        description: Metrics dashboards on cluster
+        description: Metrics dashboards
     - Longhorn:
         icon: longhorn.png
         href: http://192.168.1.50:8081
-        description: Storage management on cluster
+        description: Storage management
 - Home Automation:
     - Home Assistant:
         icon: home-assistant.png
         href: http://192.168.1.50:8123
-        description: Smart home automation on cluster
+        description: Smart home automation
 - Game Servers:
     - CraftyController:
         icon: minecraft.png
         href: https://192.168.1.161:8443
-        description: Game server management on Diakonos
+        description: Game server management
     - Dynmap:
         icon: map.png
         href: http://192.168.1.161:8123/
-        description: Minecraft live map on Diakonos
+        description: Minecraft live map
 - Networking:
     - WireGuard:
         icon: wireguard.png
         href: http://192.168.1.51:51821
-        description: VPN administration on cluster
+        description: VPN administration
 - ARR Services:
     - qBittorrent:
         icon: qbittorrent.png
         href: http://192.168.1.55:8080
-        description: Torrent client on cluster, VPN routed
+        description: Torrent client, VPN routed
     - Prowlarr:
         icon: prowlarr.png
         href: http://192.168.1.55:9696
-        description: Indexer manager on cluster, VPN routed
+        description: Indexer manager, VPN routed
     - Sonarr:
         icon: sonarr.png
         href: http://192.168.1.56:8989
-        description: TV automation on cluster
+        description: TV automation
     - Radarr:
         icon: radarr.png
         href: http://192.168.1.56:7878
-        description: Movie automation on cluster
+        description: Movie automation
     - Lidarr:
         icon: lidarr.png
         href: http://192.168.1.56:8686
-        description: Music automation on cluster
+        description: Music automation
     - Bazarr:
         icon: bazarr.png
         href: http://192.168.1.56:6767
-        description: Subtitle automation on cluster
+        description: Subtitle automation
