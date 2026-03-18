@@ -5,5 +5,5 @@ resources:
   - immich
   - arr
   - home-assistant
-  - homepage
+  - homepage/application.yaml
   - kiwix
