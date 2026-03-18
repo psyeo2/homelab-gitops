@@ -77,11 +77,41 @@
     return badge;
   };
 
+  const pickBadgeAnchor = (anchors) => {
+    return anchors
+      .slice()
+      .sort((left, right) => {
+        const textDelta = right.textContent.trim().length - left.textContent.trim().length;
+
+        if (textDelta !== 0) {
+          return textDelta;
+        }
+
+        return Array.from(left.parentElement?.children ?? []).indexOf(right) -
+          Array.from(right.parentElement?.children ?? []).indexOf(left);
+      })[0];
+  };
+
   const applyHostBadges = () => {
+    const anchorsByHref = new Map();
+
     document.querySelectorAll("a[href]").forEach((anchor) => {
       const kind = getHostKind(anchor.href);
 
-      if (!kind || anchor.dataset.hostBadgeApplied === "true") {
+      if (!kind) {
+        return;
+      }
+
+      const normalizedHref = normalizeUrl(anchor.href);
+      const entry = anchorsByHref.get(normalizedHref) ?? { kind, anchors: [] };
+      entry.anchors.push(anchor);
+      anchorsByHref.set(normalizedHref, entry);
+    });
+
+    anchorsByHref.forEach(({ kind, anchors }) => {
+      const anchor = pickBadgeAnchor(anchors);
+
+      if (!anchor || anchor.dataset.hostBadgeApplied === "true") {
         return;
       }
 
