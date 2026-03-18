@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prodesks-grafana
+  name: prodesks-prometheus
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: "25"
@@ -35,40 +35,7 @@ spec:
           jobNameOverride: k3s-server
 
         grafana:
-          defaultDashboardsTimezone: browser
-          persistence:
-            enabled: true
-            storageClassName: longhorn
-            accessModes:
-              - ReadWriteOnce
-            size: 5Gi
-          service:
-            type: LoadBalancer
-            port: 3000
-            targetPort: 3000
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.50
-              metallb.io/allow-shared-ip: ui-vip
-          sidecar:
-            datasources:
-              defaultDatasourceScrapeInterval: 30s
-          dashboardProviders:
-            dashboardproviders.yaml:
-              apiVersion: 1
-              providers:
-                - name: infrastructure
-                  orgId: 1
-                  folder: Infrastructure
-                  type: file
-                  disableDeletion: true
-                  editable: true
-                  options:
-                    path: /var/lib/grafana/dashboards/infrastructure
-          dashboards:
-            infrastructure:
-              node-exporter-full:
-                url: https://raw.githubusercontent.com/rfmoz/grafana-dashboards/master/prometheus/node-exporter-full.json
-                token: ""
+          enabled: false
 
         prometheus:
           prometheusSpec:

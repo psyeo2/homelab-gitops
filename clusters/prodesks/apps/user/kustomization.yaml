@@ -4,6 +4,7 @@ resources:
   - wireguard/wireguard.yaml
   - immich
   - arr
+  - grafana/application.yaml
   - home-assistant
   - homepage/application.yaml
   - kiwix
