@@ -39,7 +39,7 @@ spec:
               metallb.io/allow-shared-ip: ui-vip
             ports:
               http:
-                port: 8080
+                port: 8082
                 targetPort: 8080
         persistence:
           library:

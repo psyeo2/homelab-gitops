@@ -71,3 +71,7 @@
             icon: longhorn.png
             href: http://192.168.1.50:8081
             description: Storage management
+        - Kiwix:
+            icon: wikipedia.png
+            href: http://192.168.1.50:8082
+            description: Offline ZIM library
