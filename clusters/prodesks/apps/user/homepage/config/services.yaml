@@ -45,6 +45,15 @@
         icon: home-assistant.png
         href: http://192.168.1.50:8123
         description: Smart home automation on cluster
+- Game Servers:
+    - CraftyController:
+        icon: minecraft.png
+        href: https://192.168.1.161:8443
+        description: Game server management on Diakonos
+    - Dynmap:
+        icon: map.png
+        href: http://192.168.1.161:8123/
+        description: Minecraft live map on Diakonos
 - Networking:
     - WireGuard:
         icon: wireguard.png

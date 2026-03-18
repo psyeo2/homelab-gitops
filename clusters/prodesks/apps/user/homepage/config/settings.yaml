@@ -17,6 +17,9 @@ layout:
   Home Automation:
     style: row
     columns: 3
+  Game Servers:
+    style: row
+    columns: 3
   Networking:
     style: row
     columns: 3
