@@ -1,0 +1,106 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-grafana
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 82.10.3
+    helm:
+      releaseName: monitoring
+      values: |
+        fullnameOverride: monitoring
+
+        alertmanager:
+          enabled: false
+
+        kubeEtcd:
+          enabled: false
+
+        kubeControllerManager:
+          enabled: false
+
+        kubeScheduler:
+          enabled: false
+
+        kubeProxy:
+          enabled: false
+
+        kubelet:
+          jobNameOverride: k3s-server
+
+        grafana:
+          defaultDashboardsTimezone: browser
+          persistence:
+            enabled: true
+            storageClassName: longhorn
+            accessModes:
+              - ReadWriteOnce
+            size: 5Gi
+          service:
+            type: LoadBalancer
+            port: 3000
+            targetPort: 3000
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.50
+              metallb.io/allow-shared-ip: ui-vip
+          sidecar:
+            datasources:
+              defaultDatasourceScrapeInterval: 30s
+          dashboardProviders:
+            dashboardproviders.yaml:
+              apiVersion: 1
+              providers:
+                - name: infrastructure
+                  orgId: 1
+                  folder: Infrastructure
+                  type: file
+                  disableDeletion: true
+                  editable: true
+                  options:
+                    path: /var/lib/grafana/dashboards/infrastructure
+          dashboards:
+            infrastructure:
+              node-exporter-full:
+                url: https://raw.githubusercontent.com/rfmoz/grafana-dashboards/master/prometheus/node-exporter-full.json
+                token: ""
+
+        prometheus:
+          prometheusSpec:
+            retention: 15d
+            scrapeInterval: 30s
+            evaluationInterval: 30s
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: longhorn
+                  accessModes:
+                    - ReadWriteOnce
+                  resources:
+                    requests:
+                      storage: 20Gi
+
+        prometheus-node-exporter:
+          extraArgs:
+            - --collector.systemd
+            - --collector.processes
+          service:
+            labels:
+              job: node
+          prometheus:
+            monitor:
+              jobLabel: job
+  destination:
+    name: in-cluster
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
