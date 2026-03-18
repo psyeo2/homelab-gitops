@@ -1,3 +1,20 @@
+- Media Services:
+    - Immich:
+        icon: immich.png
+        href: http://192.168.1.54:2283
+        description: Photo and video library on cluster
+    - Jellyfin:
+        icon: jellyfin.png
+        href: http://192.168.1.161:8096
+        description: Media server on Diakonos Ubuntu VM
+    - Jellyseerr:
+        icon: jellyseerr.png
+        href: http://192.168.1.56:5055
+        description: Media request manager on cluster
+    - Kiwix:
+        icon: wikipedia.png
+        href: http://192.168.1.50:8082
+        description: Offline ZIM library on cluster
 - Hardware Management:
     - Argo CD:
         icon: argo-cd.png
@@ -15,63 +32,46 @@
         icon: router.png
         href: https://192.168.1.254
         description: Router management
-- VM Services:
-    - Jellyfin:
-        icon: jellyfin.png
-        href: http://192.168.1.161:8096
-        description: Media server on Diakonos Ubuntu VM
-- Cluster:
-    - Apps:
-        - Immich:
-            icon: immich.png
-            href: http://192.168.1.54:2283
-            description: Photo and video library
-        - Home Assistant:
-            icon: home-assistant.png
-            href: http://192.168.1.50:8123
-            description: Smart home automation
-        - WireGuard:
-            icon: wireguard.png
-            href: http://192.168.1.51:51821
-            description: VPN administration
-        - qBittorrent:
-            icon: qbittorrent.png
-            href: http://192.168.1.55:8080
-            description: Torrent client (VPN routed)
-        - Prowlarr:
-            icon: prowlarr.png
-            href: http://192.168.1.55:9696
-            description: Indexer manager (VPN routed)
-        - Sonarr:
-            icon: sonarr.png
-            href: http://192.168.1.56:8989
-            description: TV automation
-        - Radarr:
-            icon: radarr.png
-            href: http://192.168.1.56:7878
-            description: Movie automation
-        - Lidarr:
-            icon: lidarr.png
-            href: http://192.168.1.56:8686
-            description: Music automation
-        - Bazarr:
-            icon: bazarr.png
-            href: http://192.168.1.56:6767
-            description: Subtitle automation
-        - Jellyseerr:
-            icon: jellyseerr.png
-            href: http://192.168.1.56:5055
-            description: Media request manager
-    - Infra:
-        - Grafana:
-            icon: grafana.png
-            href: http://192.168.1.50:3000
-            description: Metrics dashboards
-        - Longhorn:
-            icon: longhorn.png
-            href: http://192.168.1.50:8081
-            description: Storage management
-        - Kiwix:
-            icon: wikipedia.png
-            href: http://192.168.1.50:8082
-            description: Offline ZIM library
+    - Grafana:
+        icon: grafana.png
+        href: http://192.168.1.50:3000
+        description: Metrics dashboards on cluster
+    - Longhorn:
+        icon: longhorn.png
+        href: http://192.168.1.50:8081
+        description: Storage management on cluster
+- Home Automation:
+    - Home Assistant:
+        icon: home-assistant.png
+        href: http://192.168.1.50:8123
+        description: Smart home automation on cluster
+- Networking:
+    - WireGuard:
+        icon: wireguard.png
+        href: http://192.168.1.51:51821
+        description: VPN administration on cluster
+- ARR Services:
+    - qBittorrent:
+        icon: qbittorrent.png
+        href: http://192.168.1.55:8080
+        description: Torrent client on cluster, VPN routed
+    - Prowlarr:
+        icon: prowlarr.png
+        href: http://192.168.1.55:9696
+        description: Indexer manager on cluster, VPN routed
+    - Sonarr:
+        icon: sonarr.png
+        href: http://192.168.1.56:8989
+        description: TV automation on cluster
+    - Radarr:
+        icon: radarr.png
+        href: http://192.168.1.56:7878
+        description: Movie automation on cluster
+    - Lidarr:
+        icon: lidarr.png
+        href: http://192.168.1.56:8686
+        description: Music automation on cluster
+    - Bazarr:
+        icon: bazarr.png
+        href: http://192.168.1.56:6767
+        description: Subtitle automation on cluster

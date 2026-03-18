@@ -5,15 +5,21 @@ useEqualHeights: true
 quicklaunch:
   provider: google
 layout:
-  Hardware Management:
-    style: row
-    columns: 3
-  VM Services:
-    style: row
-    columns: 3
-  Cluster:
-    style: row
-    columns: 3
   Bookmarks:
     style: row
     columns: 5
+  Media Services:
+    style: row
+    columns: 4
+  Hardware Management:
+    style: row
+    columns: 3
+  Home Automation:
+    style: row
+    columns: 3
+  Networking:
+    style: row
+    columns: 3
+  ARR Services:
+    style: row
+    columns: 3
