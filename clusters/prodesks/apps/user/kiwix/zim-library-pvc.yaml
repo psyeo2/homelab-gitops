@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: zim-library
+  namespace: apps
+  annotations:
+    argocd.argoproj.io/sync-wave: "16"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 12000Gi
+  storageClassName: zim-nfs
+  volumeName: zim-library-nfs-pv

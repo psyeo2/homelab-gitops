@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-kiwix
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://bjw-s-labs.github.io/helm-charts
+    chart: app-template
+    targetRevision: 4.4.0
+    helm:
+      releaseName: kiwix
+      values: |
+        controllers:
+          main:
+            type: deployment
+            strategy: Recreate
+            containers:
+              main:
+                image:
+                  repository: ghcr.io/kiwix/kiwix-tools
+                  tag: 3.8.2
+                env:
+                  TZ: Europe/London
+                command:
+                  - /bin/sh
+                  - -c
+                args:
+                  - exec kiwix-serve --port=8080 /data/*.zim
+        service:
+          main:
+            controller: main
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.50
+              metallb.io/allow-shared-ip: ui-vip
+            ports:
+              http:
+                port: 8080
+                targetPort: 8080
+        persistence:
+          library:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: zim-library
+            globalMounts:
+              - path: /data
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
