@@ -979,15 +979,9 @@ spec:
                           "expr": "max by (instance) (node_hwmon_temp_celsius{job=\"node\",chip=~\".*(k10temp|coretemp).*\"}) or max by (instance) (node_hwmon_temp_celsius{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",chip=~\".*(k10temp|coretemp).*\"})",
                           "legendFormat": "{{instance}} CPU",
                           "refId": "A"
-                        },
-                        {
-                          "editorMode": "code",
-                          "expr": "avg by (instance) (DCGM_FI_DEV_GPU_TEMP{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"})",
-                          "legendFormat": "{{instance}} GPU",
-                          "refId": "B"
                         }
                       ],
-                      "title": "CPU Temps (4 Nodes + Diakonos) and GPU Temp",
+                      "title": "CPU Temps (4 Nodes + Diakonos)",
                       "type": "timeseries"
                     },
                     {
@@ -1045,7 +1039,28 @@ spec:
                           },
                           "unit": "percent"
                         },
-                        "overrides": []
+                        "overrides": [
+                          {
+                            "matcher": {
+                              "id": "byRegexp",
+                              "options": ".* GB$"
+                            },
+                            "properties": [
+                              {
+                                "id": "unit",
+                                "value": "gbytes"
+                              },
+                              {
+                                "id": "custom.hideFrom",
+                                "value": {
+                                  "legend": true,
+                                  "tooltip": false,
+                                  "viz": true
+                                }
+                              }
+                            ]
+                          }
+                        ]
                       },
                       "gridPos": {
                         "h": 8,
@@ -1068,9 +1083,15 @@ spec:
                       "targets": [
                         {
                           "editorMode": "code",
-                          "expr": "((node_memory_MemTotal_bytes{job=\"node\"} - node_memory_MemAvailable_bytes{job=\"node\"}) / node_memory_MemTotal_bytes{job=\"node\"}) * 100 or ((node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"} - node_memory_MemAvailable_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) / node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) * 100",
-                          "legendFormat": "{{instance}}",
+                          "expr": "((node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"} - node_memory_MemAvailable_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"}) / node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"}) * 100",
+                          "legendFormat": "{{instance}} %",
                           "refId": "A"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "(node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"} - node_memory_MemAvailable_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"}) / 1073741824",
+                          "legendFormat": "{{instance}} GB",
+                          "refId": "B"
                         }
                       ],
                       "title": "RAM Usage (Nodes + Diakonos)",
@@ -1111,7 +1132,7 @@ spec:
                       "targets": [
                         {
                           "editorMode": "code",
-                          "expr": "100 * (1 - (node_filesystem_avail_bytes{job=\"node\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=\"node\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"})) or 100 * (1 - (node_filesystem_avail_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"}))",
+                          "expr": "100 * (1 - (node_filesystem_avail_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"}))",
                           "legendFormat": "{{instance}} /",
                           "refId": "A"
                         }
@@ -1129,9 +1150,50 @@ spec:
                           "color": {
                             "mode": "palette-classic"
                           },
-                          "unit": "percent"
+                          "unit": "none"
                         },
-                        "overrides": []
+                        "overrides": [
+                          {
+                            "matcher": {
+                              "id": "byRegexp",
+                              "options": ".* Util$"
+                            },
+                            "properties": [
+                              {
+                                "id": "unit",
+                                "value": "percent"
+                              },
+                              {
+                                "id": "custom.axisPlacement",
+                                "value": "left"
+                              },
+                              {
+                                "id": "custom.axisLabel",
+                                "value": "GPU Util (%)"
+                              }
+                            ]
+                          },
+                          {
+                            "matcher": {
+                              "id": "byRegexp",
+                              "options": ".* Temp$"
+                            },
+                            "properties": [
+                              {
+                                "id": "unit",
+                                "value": "celsius"
+                              },
+                              {
+                                "id": "custom.axisPlacement",
+                                "value": "right"
+                              },
+                              {
+                                "id": "custom.axisLabel",
+                                "value": "GPU Temp (C)"
+                              }
+                            ]
+                          }
+                        ]
                       },
                       "gridPos": {
                         "h": 8,
