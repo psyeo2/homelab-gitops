@@ -33,7 +33,7 @@ spec:
 
         grafana.ini:
           dashboards:
-            default_home_dashboard_path: /var/lib/grafana/dashboards/infrastructure/homelab-home.json
+            default_home_dashboard_path: /var/lib/grafana/dashboards/infrastructure/homelab-home-v2.json
 
         datasources:
           datasources.yaml:
@@ -530,6 +530,700 @@ spec:
                     "home",
                     "homelab",
                     "network",
+                    "gpu"
+                  ],
+                  "templating": {
+                    "list": []
+                  },
+                  "time": {
+                    "from": "now-12h",
+                    "to": "now"
+                  },
+                  "timezone": "",
+                  "title": "Homelab Home (Legacy)",
+                  "uid": "homelab-home-legacy",
+                  "version": 1,
+                  "weekStart": ""
+                }
+            homelab-home-v2:
+              json: |
+                {
+                  "annotations": {
+                    "list": [
+                      {
+                        "builtIn": 1,
+                        "datasource": {
+                          "type": "grafana",
+                          "uid": "-- Grafana --"
+                        },
+                        "enable": true,
+                        "hide": true,
+                        "iconColor": "rgba(0, 211, 255, 1)",
+                        "name": "Annotations & Alerts",
+                        "type": "dashboard"
+                      }
+                    ]
+                  },
+                  "editable": true,
+                  "fiscalYearStartMonth": 0,
+                  "graphTooltip": 0,
+                  "links": [],
+                  "panels": [
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 70
+                              },
+                              {
+                                "color": "red",
+                                "value": 85
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 0,
+                        "y": 0
+                      },
+                      "id": 1,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "textMode": "auto"
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "100 - (avg(rate(node_cpu_seconds_total{job=\"node\",mode=\"idle\"}[5m])) * 100)",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "ProDesk CPU Avg",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 70
+                              },
+                              {
+                                "color": "red",
+                                "value": 90
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 4,
+                        "y": 0
+                      },
+                      "id": 2,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "textMode": "auto"
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "((sum(node_memory_MemTotal_bytes{job=\"node\"}) - sum(node_memory_MemAvailable_bytes{job=\"node\"})) / sum(node_memory_MemTotal_bytes{job=\"node\"})) * 100",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "ProDesk RAM Avg",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 70
+                              },
+                              {
+                                "color": "red",
+                                "value": 90
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 8,
+                        "y": 0
+                      },
+                      "id": 3,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "textMode": "auto"
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "100 - (avg(rate(node_cpu_seconds_total{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",mode=\"idle\"}[5m])) * 100)",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Diakonos CPU",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 75
+                              },
+                              {
+                                "color": "red",
+                                "value": 90
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 12,
+                        "y": 0
+                      },
+                      "id": 4,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "textMode": "auto"
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "((node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"} - node_memory_MemAvailable_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) / node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) * 100",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Diakonos RAM",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 70
+                              },
+                              {
+                                "color": "red",
+                                "value": 90
+                              }
+                            ]
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 16,
+                        "y": 0
+                      },
+                      "id": 5,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "textMode": "auto"
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "avg(DCGM_FI_DEV_GPU_UTIL{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"})",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Ubuntu GPU Util",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "thresholds"
+                          },
+                          "thresholds": {
+                            "mode": "absolute",
+                            "steps": [
+                              {
+                                "color": "green",
+                                "value": null
+                              },
+                              {
+                                "color": "orange",
+                                "value": 70
+                              },
+                              {
+                                "color": "red",
+                                "value": 85
+                              }
+                            ]
+                          },
+                          "unit": "celsius"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 4,
+                        "w": 4,
+                        "x": 20,
+                        "y": 0
+                      },
+                      "id": 6,
+                      "options": {
+                        "colorMode": "value",
+                        "graphMode": "none",
+                        "justifyMode": "center",
+                        "orientation": "auto",
+                        "reduceOptions": {
+                          "calcs": [
+                            "lastNotNull"
+                          ],
+                          "fields": "",
+                          "values": false
+                        },
+                        "textMode": "auto"
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "avg(DCGM_FI_DEV_GPU_TEMP{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"})",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Ubuntu GPU Temp",
+                      "type": "stat"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "unit": "celsius"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 4
+                      },
+                      "id": 7,
+                      "options": {
+                        "legend": {
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "max by (instance) (node_hwmon_temp_celsius{job=\"node\",chip=~\".*(k10temp|coretemp).*\"}) or max by (instance) (node_hwmon_temp_celsius{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",chip=~\".*(k10temp|coretemp).*\"})",
+                          "legendFormat": "{{instance}} CPU",
+                          "refId": "A"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "avg by (instance) (DCGM_FI_DEV_GPU_TEMP{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"})",
+                          "legendFormat": "{{instance}} GPU",
+                          "refId": "B"
+                        }
+                      ],
+                      "title": "CPU Temps (4 Nodes + Diakonos) and GPU Temp",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 4
+                      },
+                      "id": 8,
+                      "options": {
+                        "legend": {
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{job=\"node\",mode=\"idle\"}[5m])) * 100) or (100 - (avg by (instance) (rate(node_cpu_seconds_total{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",mode=\"idle\"}[5m])) * 100))",
+                          "legendFormat": "{{instance}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "CPU Usage (Nodes + Diakonos)",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 12
+                      },
+                      "id": 9,
+                      "options": {
+                        "legend": {
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "((node_memory_MemTotal_bytes{job=\"node\"} - node_memory_MemAvailable_bytes{job=\"node\"}) / node_memory_MemTotal_bytes{job=\"node\"}) * 100 or ((node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"} - node_memory_MemAvailable_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) / node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) * 100",
+                          "legendFormat": "{{instance}}",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "RAM Usage (Nodes + Diakonos)",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 12
+                      },
+                      "id": 10,
+                      "options": {
+                        "legend": {
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "100 * (1 - (node_filesystem_avail_bytes{job=\"node\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=\"node\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"})) or 100 * (1 - (node_filesystem_avail_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"}))",
+                          "legendFormat": "{{instance}} /",
+                          "refId": "A"
+                        }
+                      ],
+                      "title": "Disk Usage (Nodes + Diakonos Root)",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "unit": "percent"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 0,
+                        "y": 20
+                      },
+                      "id": 11,
+                      "options": {
+                        "legend": {
+                          "displayMode": "list",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "DCGM_FI_DEV_GPU_UTIL{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"}",
+                          "legendFormat": "GPU {{gpu}} Util",
+                          "refId": "A"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "DCGM_FI_DEV_GPU_TEMP{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"}",
+                          "legendFormat": "GPU {{gpu}} Temp",
+                          "refId": "B"
+                        }
+                      ],
+                      "title": "Ubuntu VM GPU Usage and Temps",
+                      "type": "timeseries"
+                    },
+                    {
+                      "datasource": {
+                        "type": "prometheus",
+                        "uid": "Prometheus"
+                      },
+                      "fieldConfig": {
+                        "defaults": {
+                          "color": {
+                            "mode": "palette-classic"
+                          },
+                          "unit": "Bps"
+                        },
+                        "overrides": []
+                      },
+                      "gridPos": {
+                        "h": 8,
+                        "w": 12,
+                        "x": 12,
+                        "y": 20
+                      },
+                      "id": 12,
+                      "options": {
+                        "legend": {
+                          "displayMode": "table",
+                          "placement": "bottom",
+                          "showLegend": true
+                        },
+                        "tooltip": {
+                          "mode": "multi",
+                          "sort": "none"
+                        }
+                      },
+                      "targets": [
+                        {
+                          "editorMode": "code",
+                          "expr": "sum(rate(node_network_receive_bytes_total{job=~\"node|external-node-exporter\",device!~\"lo|veth.*|cni.*|flannel.*\"}[5m]))",
+                          "legendFormat": "RX Total",
+                          "refId": "A"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "sum(rate(node_network_transmit_bytes_total{job=~\"node|external-node-exporter\",device!~\"lo|veth.*|cni.*|flannel.*\"}[5m]))",
+                          "legendFormat": "TX Total",
+                          "refId": "B"
+                        }
+                      ],
+                      "title": "Network Up vs Down",
+                      "type": "timeseries"
+                    }
+                  ],
+                  "refresh": "30s",
+                  "schemaVersion": 39,
+                  "tags": [
+                    "home",
+                    "homelab",
+                    "nodes",
                     "gpu"
                   ],
                   "templating": {
