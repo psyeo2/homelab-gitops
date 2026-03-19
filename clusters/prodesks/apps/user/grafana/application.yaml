@@ -1043,6 +1043,18 @@ spec:
                           {
                             "matcher": {
                               "id": "byRegexp",
+                              "options": "^192\\.168\\.1\\.2[0-4]:9100 %$"
+                            },
+                            "properties": [
+                              {
+                                "id": "custom.axisPlacement",
+                                "value": "left"
+                              }
+                            ]
+                          },
+                          {
+                            "matcher": {
+                              "id": "byRegexp",
                               "options": ".* GB$"
                             },
                             "properties": [
@@ -1051,12 +1063,20 @@ spec:
                                 "value": "gbytes"
                               },
                               {
-                                "id": "custom.hideFrom",
-                                "value": {
-                                  "legend": true,
-                                  "tooltip": false,
-                                  "viz": true
-                                }
+                                "id": "custom.axisPlacement",
+                                "value": "right"
+                              },
+                              {
+                                "id": "custom.axisLabel",
+                                "value": "RAM Used (GB)"
+                              },
+                              {
+                                "id": "custom.fillOpacity",
+                                "value": 0
+                              },
+                              {
+                                "id": "custom.lineWidth",
+                                "value": 1
                               }
                             ]
                           }
@@ -1083,15 +1103,27 @@ spec:
                       "targets": [
                         {
                           "editorMode": "code",
-                          "expr": "((node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"} - node_memory_MemAvailable_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"}) / node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"}) * 100",
+                          "expr": "((node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"} - node_memory_MemAvailable_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) / node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) * 100",
                           "legendFormat": "{{instance}} %",
                           "refId": "A"
                         },
                         {
                           "editorMode": "code",
-                          "expr": "(node_memory_MemTotal_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"} - node_memory_MemAvailable_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\"}) / 1073741824",
-                          "legendFormat": "{{instance}} GB",
+                          "expr": "((node_memory_MemTotal_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\"} - node_memory_MemAvailable_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\"}) / node_memory_MemTotal_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\"}) * 100",
+                          "legendFormat": "{{instance}} %",
                           "refId": "B"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "(node_memory_MemTotal_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"} - node_memory_MemAvailable_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\"}) / 1073741824",
+                          "legendFormat": "{{instance}} GB",
+                          "refId": "C"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "(node_memory_MemTotal_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\"} - node_memory_MemAvailable_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\"}) / 1073741824",
+                          "legendFormat": "{{instance}} GB",
+                          "refId": "D"
                         }
                       ],
                       "title": "RAM Usage (Nodes + Diakonos)",
@@ -1132,9 +1164,15 @@ spec:
                       "targets": [
                         {
                           "editorMode": "code",
-                          "expr": "100 * (1 - (node_filesystem_avail_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=~\"node|external-node-exporter\",instance=~\"192.168.1.2[0-4]:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"}))",
+                          "expr": "100 * (1 - (node_filesystem_avail_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=\"external-node-exporter\",instance=\"192.168.1.20:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"}))",
                           "legendFormat": "{{instance}} /",
                           "refId": "A"
+                        },
+                        {
+                          "editorMode": "code",
+                          "expr": "100 * (1 - (node_filesystem_avail_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"} / node_filesystem_size_bytes{job=\"node\",instance=~\"192.168.1.2[1-4]:9100\",fstype!~\"tmpfs|squashfs|overlay|ramfs\",mountpoint=\"/\"}))",
+                          "legendFormat": "{{instance}} /",
+                          "refId": "B"
                         }
                       ],
                       "title": "Disk Usage (Nodes + Diakonos Root)",
