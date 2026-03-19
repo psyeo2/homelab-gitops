@@ -1,0 +1,27 @@
+default_config:
+
+rest:
+  - resource: "http://192.168.1.20:9090/api/v1/query?query=sum%28up%29"
+    scan_interval: 60
+    sensor:
+      - name: "Diakonos Prometheus Up Targets"
+        unique_id: "diakonos_prometheus_up_targets"
+        value_template: "{{ value_json.data.result[0].value[1] | float(0) }}"
+        unit_of_measurement: "targets"
+        state_class: measurement
+  - resource: "http://monitoring-prometheus.monitoring.svc.cluster.local:9090/api/v1/query?query=sum%28up%29"
+    scan_interval: 60
+    sensor:
+      - name: "K3s Prometheus Up Targets"
+        unique_id: "k3s_prometheus_up_targets"
+        value_template: "{{ value_json.data.result[0].value[1] | float(0) }}"
+        unit_of_measurement: "targets"
+        state_class: measurement
+  - resource: "http://monitoring-prometheus.monitoring.svc.cluster.local:9090/api/v1/query?query=count%28kube_pod_info%29"
+    scan_interval: 60
+    sensor:
+      - name: "K3s Pod Count"
+        unique_id: "k3s_prometheus_pod_count"
+        value_template: "{{ value_json.data.result[0].value[1] | float(0) }}"
+        unit_of_measurement: "pods"
+        state_class: measurement

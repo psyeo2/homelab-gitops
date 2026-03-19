@@ -27,6 +27,18 @@ spec:
           storageClass: longhorn
           size: 10Gi
           accessMode: ReadWriteOnce
+        additionalVolumes:
+          - name: ha-configuration
+            configMap:
+              name: home-assistant-configuration
+              items:
+                - key: configuration.yaml
+                  path: configuration.yaml
+        additionalMounts:
+          - name: ha-configuration
+            mountPath: /config/configuration.yaml
+            subPath: configuration.yaml
+            readOnly: true
   destination:
     name: in-cluster
     namespace: apps
