@@ -5,9 +5,13 @@
 - Namespace: `apps`
 - Helm chart: `grafana/grafana`
 - Datasource: `Prometheus` at `monitoring-prometheus.monitoring.svc.cluster.local:9090`
+- Default home dashboard: `Homelab Home`
 - Dashboards:
   - `Node Exporter Full` (`gnetId: 1860`)
-  - `ProDesk + Proxmox + GPU VM Overview` (provisioned from inline JSON)
+  - `NVIDIA DCGM Exporter` (`gnetId: 12239`)
+  - `Cluster` (`gnetId: 15757`)
+  - `Longhorn` (`gnetId: 16888`)
+  - `Homelab Home` (provisioned from inline JSON)
 
 Admin credentials are stored in the chart-generated secret. After first sync:
 
