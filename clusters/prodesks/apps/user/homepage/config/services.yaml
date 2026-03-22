@@ -39,7 +39,7 @@
     - Longhorn:
         icon: longhorn.png
         href: http://192.168.1.50:8081
-        description: Storage management
+        description: Cluster storage management
 - Home Automation:
     - Home Assistant:
         icon: home-assistant.png
@@ -49,7 +49,7 @@
     - CraftyController:
         icon: minecraft.png
         href: https://192.168.1.161:8443
-        description: Game server management
+        description: Minecraft server management
     - Dynmap:
         icon: mdi-map
         href: http://192.168.1.161:8123/
