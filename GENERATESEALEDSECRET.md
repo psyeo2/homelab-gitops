@@ -2,7 +2,7 @@
 
 1. Create `secret-plaintext.example.yaml` locally:
    ```bash
-   kubectl create secret generic <secret-namespace> \
+   kubectl create secret generic <secret-name> \
       --from-literal=<SECRET_NAME>=<secret> \
       --namespace apps \
       --dry-run=client -o yaml > exposed-secret.yaml

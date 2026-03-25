@@ -3,5 +3,7 @@ kind: Kustomization
 resources:
   - cloudflare-ddns/application.yaml
   - cloudflared/application.yaml
+  - mqtt
   - prometheus
   - postgres
+  - redis

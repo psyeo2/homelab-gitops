@@ -1,0 +1,78 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-rabbitmq
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: rabbitmq
+    targetRevision: 16.0.14
+    helm:
+      releaseName: rabbitmq
+      values: |
+        fullnameOverride: rabbitmq
+
+        replicaCount: 1
+
+        clustering:
+          enabled: false
+
+        auth:
+          username: admin
+          securePassword: true
+          existingPasswordSecret: rabbit-mq
+          existingSecretPasswordKey: RABBITMQ_DEFAULT_PASS
+          existingErlangSecret: rabbit-mq
+          existingSecretErlangKey: RABBITMQ_ERLANG_COOKIE
+
+        plugins: "rabbitmq_management rabbitmq_peer_discovery_k8s"
+        extraPlugins: "rabbitmq_mqtt"
+
+        extraConfiguration: |
+          mqtt.listeners.tcp.default = 1883
+          mqtt.allow_anonymous = false
+          mqtt.vhost = /
+          mqtt.exchange = amq.topic
+
+        extraContainerPorts:
+          - name: mqtt
+            containerPort: 1883
+            protocol: TCP
+
+        service:
+          type: ClusterIP
+          extraPorts:
+            - name: mqtt
+              port: 1883
+              targetPort: mqtt
+              protocol: TCP
+
+        networkPolicy:
+          enabled: false
+
+        persistence:
+          enabled: true
+          storageClass: longhorn
+          size: 8Gi
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: "1"
+            memory: 1Gi
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

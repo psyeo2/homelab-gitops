@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prodesks-redis
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "25"
+spec:
+  project: default
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: redis
+    targetRevision: 25.3.2
+    helm:
+      releaseName: redis
+      values: |
+        fullnameOverride: redis
+
+        architecture: standalone
+
+        auth:
+          enabled: true
+          existingSecret: redis
+          existingSecretPasswordKey: REDIS_DEFAULT_PASS
+
+        master:
+          service:
+            type: ClusterIP
+          persistence:
+            enabled: true
+            storageClass: longhorn
+            size: 8Gi
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+  destination:
+    name: in-cluster
+    namespace: apps
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
