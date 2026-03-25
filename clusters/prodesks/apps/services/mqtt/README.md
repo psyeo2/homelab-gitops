@@ -2,6 +2,8 @@
 
 MQTT is deployed here using the Bitnami `rabbitmq` Helm chart with the RabbitMQ MQTT plugin enabled.
 
+As of March 25, 2026, the chart default public image reference for this release does not pull from `docker.io/bitnami/rabbitmq`, so this repo pins RabbitMQ to `docker.io/bitnamilegacy/rabbitmq:4.1.3-debian-12-r1`.
+
 Current defaults:
 
 - Single-node RabbitMQ deployment
