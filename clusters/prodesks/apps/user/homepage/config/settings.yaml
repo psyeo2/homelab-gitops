@@ -11,6 +11,9 @@ layout:
   Hardware Management:
     style: row
     columns: 3
+  Platform Services:
+    style: row
+    columns: 3
   Media Services:
     style: row
     columns: 4

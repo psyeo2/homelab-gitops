@@ -3,10 +3,6 @@
         icon: argo-cd.png
         href: http://192.168.1.50:8080
         description: k3s GitOps control plane
-    - Harbor:
-        icon: mdi-docker
-        href: http://192.168.1.57
-        description: Container registry
     - Proxmox:
         icon: proxmox.png
         href: https://192.168.1.20:8006
@@ -27,6 +23,11 @@
         icon: longhorn.png
         href: http://192.168.1.50:8081
         description: Cluster storage management
+- Platform Services:
+    - Harbor:
+        icon: mdi-docker
+        href: http://192.168.1.57
+        description: Container registry
 - Media Services:
     - Immich:
         icon: immich.png
