@@ -287,7 +287,7 @@ spec:
                           "refId": "A"
                         }
                       ],
-                      "title": "Ubuntu VM GPU Util",
+                      "title": "A4000 GPU Util",
                       "type": "stat"
                     },
                     {
@@ -879,7 +879,7 @@ spec:
                           "refId": "A"
                         }
                       ],
-                      "title": "Ubuntu VRAM Usage",
+                      "title": "A4000 VRAM Usage",
                       "type": "stat"
                     },
                     {
@@ -1268,7 +1268,7 @@ spec:
                           "refId": "B"
                         }
                       ],
-                      "title": "Ubuntu VM GPU Usage and Temps",
+                      "title": "A4000 Usage and Temps",
                       "type": "timeseries"
                     },
                     {
