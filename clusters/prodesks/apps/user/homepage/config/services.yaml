@@ -25,7 +25,7 @@
         description: Cluster storage management
 - Platform Services:
     - Harbor:
-        icon: mdi-docker
+        icon: kubernetes.png
         href: http://192.168.1.57
         description: Container registry
 - Media Services:
