@@ -21,7 +21,7 @@ spec:
         auth:
           enabled: true
           existingSecret: redis
-          existingSecretPasswordKey: REDIS_DEFAULT_PASS
+          existingSecretPasswordKey: REDIS_PASSWORD
 
         master:
           service:
