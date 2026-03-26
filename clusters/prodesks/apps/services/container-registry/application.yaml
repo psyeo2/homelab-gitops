@@ -41,6 +41,10 @@ spec:
                 storageClass: longhorn
                 accessMode: ReadWriteOnce
                 size: 2Gi
+            redis:
+              storageClass: longhorn
+              accessMode: ReadWriteOnce
+              size: 2Gi
 
         database:
           type: external
@@ -51,13 +55,6 @@ spec:
             coreDatabase: harbor_db
             existingSecret: harbor
             sslmode: disable
-
-        redis:
-          type: external
-          external:
-            addr: redis-master.apps.svc.cluster.local:6379
-            existingSecret:
-              REDIS_PASSWORD: redis
 
         existingSecretAdminPassword: harbor
         existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD

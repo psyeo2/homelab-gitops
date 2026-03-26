@@ -6,9 +6,8 @@ Current bootstrap defaults:
 
 - LAN exposure via MetalLB `LoadBalancer` on `192.168.1.57`
 - `externalURL` set to `http://192.168.1.57`
-- Longhorn-backed persistence for registry and job logs
+- Longhorn-backed persistence for registry, job logs, and internal Redis
 - External PostgreSQL via `prodesks-postgres-rw.apps.svc.cluster.local`
-- External Redis via `redis-master.apps.svc.cluster.local:6379`
 - Trivy disabled for the initial bring-up
 - Metrics and `ServiceMonitor` enabled for the existing Prometheus stack
 
