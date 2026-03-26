@@ -8,12 +8,12 @@ layout:
   Bookmarks:
     style: row
     columns: 5
-  Media Services:
-    style: row
-    columns: 4
   Hardware Management:
     style: row
     columns: 3
+  Media Services:
+    style: row
+    columns: 4
   Home Automation:
     style: row
     columns: 3
