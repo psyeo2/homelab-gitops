@@ -56,7 +56,8 @@ spec:
           type: external
           external:
             addr: redis-master.apps.svc.cluster.local:6379
-            existingSecret: redis
+            existingSecret:
+              REDIS_PASSWORD: redis
 
         existingSecretAdminPassword: harbor
         existingSecretAdminPasswordKey: HARBOR_ADMIN_PASSWORD
