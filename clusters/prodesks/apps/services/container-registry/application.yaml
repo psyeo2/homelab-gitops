@@ -22,8 +22,6 @@ spec:
           loadBalancer:
             name: harbor
             IP: 192.168.1.57
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.57
             ports:
               httpPort: 80
               httpsPort: 443
