@@ -30,3 +30,21 @@ Connect from LAN once MetalLB assigns an external IP:
 ```bash
 psql "host=<metallb-ip> port=5432 dbname=app user=app sslmode=disable"
 ```
+
+## Access
+
+```bash
+# Enter the pod
+kubectl -n apps exec -it prodesks-postgres-1 -- sh
+
+# psql
+psql -U postgres -d postgres
+```
+
+## User/Database Creation
+
+```bash
+CREATE ROLE <service>_user LOGIN PASSWORD '<password>';
+CREATE DATABASE <service>_db OWNER <service>_user;
+GRANT ALL PRIVILEGES ON DATABASE <service>_db TO <service>_use;
+```

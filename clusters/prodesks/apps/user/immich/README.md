@@ -21,7 +21,7 @@ Immich is deployed as an Argo CD `Application` (`immich.yaml`) using the officia
 
 - The NFS PV points to `/var/nfs/shared/Photos`.
 - Immich uploads are stored under `/data/immich/uploads` inside the container (NAS path `/var/nfs/shared/Photos/immich/uploads`).
-- External libraries should be added in Immich as `/data/photos` and `/data/videos`.
+- External libraries should be added in Immich as `/external/photos` and `/external/videos`.
 - Do not add `/data` or `/data/immich` as external libraries.
 
 ## Important values to verify
@@ -33,11 +33,7 @@ Immich is deployed as an Argo CD `Application` (`immich.yaml`) using the officia
   - `image.tag` (currently `v1.133.0`)
   - `server.service.main.loadBalancerIP` (currently `192.168.1.54`)
 
-## Deploy
+## After Deployment
 
-```bash
-argocd app sync prodesks-apps
-kubectl -n apps get pvc immich-library
-kubectl -n apps get pods | grep immich
-kubectl -n apps get svc | grep immich
-```
+- Add external libraries as above
+- Set Immich Machine Learning URL to `http://192.168.1.161:3003`
