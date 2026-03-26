@@ -875,11 +875,11 @@ spec:
                       "targets": [
                         {
                           "editorMode": "code",
-                          "expr": "avg(DCGM_FI_DEV_GPU_UTIL{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"})",
+                          "expr": "100 * avg(DCGM_FI_DEV_FB_USED{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"} / (DCGM_FI_DEV_FB_USED{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"} + DCGM_FI_DEV_FB_FREE{job=\"external-dcgm-exporter\",instance=\"192.168.1.161:9400\"}))",
                           "refId": "A"
                         }
                       ],
-                      "title": "Ubuntu GPU Util",
+                      "title": "Ubuntu VRAM Usage",
                       "type": "stat"
                     },
                     {
