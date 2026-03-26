@@ -23,6 +23,9 @@ spec:
             - ReadWriteOnce
           size: 5Gi
 
+        deploymentStrategy:
+          type: Recreate
+
         service:
           type: LoadBalancer
           port: 3000
