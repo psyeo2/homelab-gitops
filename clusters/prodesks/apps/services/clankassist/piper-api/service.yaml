@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: clankassist-piper-api
+  namespace: apps
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: clankassist-piper-api
+  ports:
+    - name: http
+      port: 5000
+      targetPort: http
