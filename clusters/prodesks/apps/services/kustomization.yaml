@@ -5,6 +5,5 @@ resources:
   - cloudflare-ddns/application.yaml
   - cloudflared/application.yaml
   - container-registry
-  - prometheus
   - postgres
   - redis
