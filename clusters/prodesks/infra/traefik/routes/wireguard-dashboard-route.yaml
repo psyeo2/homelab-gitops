@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: wireguard
+  namespace: wireguard
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`wireguard.home.arpa`)
+      services:
+        - kind: Service
+          name: wireguard-wg-easy-http
+          port: 51821
+  tls: {}

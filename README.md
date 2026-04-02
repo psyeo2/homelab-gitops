@@ -58,15 +58,17 @@ After that, new apps/resources only need Git commits.
 
 Before syncing, make sure each node has Longhorn prerequisites installed (notably `open-iscsi`/`iscsiadm`) and running.
 
-## UI Access (LAN VIP)
+## UI Access (Current State)
 
-- This repo exposes UI services directly via a shared MetalLB VIP:
+- This repo currently exposes some UI services directly via a shared MetalLB VIP:
   - Argo CD: `https://192.168.1.50:8080`
   - Longhorn: `http://192.168.1.50:8081`
 - Manifests:
   - `clusters/prodesks/infra/networking/argocd-ui-lb.yaml`
   - `clusters/prodesks/infra/networking/longhorn-ui-lb.yaml`
 - Both services share the same VIP using `metallb.io/allow-shared-ip`.
+
+Traefik is now also managed in Git and owns the main ingress VIP at `192.168.1.50`. Direct `IP:port` exposure is still present for some services during the transition to hostname-based routing.
 
 ## LoadBalancer IP (MetalLB)
 
@@ -77,11 +79,14 @@ Before syncing, make sure each node has Longhorn prerequisites installed (notabl
   - `clusters/prodesks/infra/metallb/metallb-config`
 - Current LAN pool:
   - `192.168.1.50-192.168.1.59`
+- Traefik is managed by:
+  - `clusters/prodesks/infra/traefik/traefik.yaml`
 - Traefik is pinned to VIP:
-  - `192.168.1.50` via `metallb.io/loadBalancerIPs` annotation.
+  - `192.168.1.50` via the chart-managed `LoadBalancer` service annotations.
 
 Important for k3s:
 - Disable built-in `servicelb` when using MetalLB as the load balancer controller to avoid conflicts.
+- If k3s bundled Traefik is still enabled in the cluster, disable it before relying on the Git-managed Traefik release as the only ingress controller.
 
 ## Sealed Secrets
 

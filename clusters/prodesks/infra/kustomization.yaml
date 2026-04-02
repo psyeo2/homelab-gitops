@@ -6,4 +6,5 @@ resources:
   - sealed-secrets/sealed-secrets.yaml
   - metallb/metallb.yaml
   - metallb/metallb-config.yaml
+  - traefik
   - networking

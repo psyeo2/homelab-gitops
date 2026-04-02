@@ -7,3 +7,4 @@ resources:
   - longhorn-system.yaml
   - metallb-system.yaml
   - sealed-secrets.yaml
+  - wireguard.yaml
