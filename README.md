@@ -68,7 +68,7 @@ Before syncing, make sure each node has Longhorn prerequisites installed (notabl
   - `clusters/prodesks/infra/networking/longhorn-ui-lb.yaml`
 - Both services share the same VIP using `metallb.io/allow-shared-ip`.
 
-Traefik is now also managed in Git and owns the main ingress VIP at `192.168.1.50`. Direct `IP:port` exposure is still present for some services during the transition to hostname-based routing.
+Traefik is now configured in Git as the bundled k3s ingress controller on the main ingress VIP `192.168.1.50`. Direct `IP:port` exposure is still present for some services during the transition to hostname-based routing.
 
 ## LoadBalancer IP (MetalLB)
 
@@ -79,14 +79,14 @@ Traefik is now also managed in Git and owns the main ingress VIP at `192.168.1.5
   - `clusters/prodesks/infra/metallb/metallb-config`
 - Current LAN pool:
   - `192.168.1.50-192.168.1.59`
-- Traefik is managed by:
-  - `clusters/prodesks/infra/traefik/traefik.yaml`
+- Traefik is configured by:
+  - `clusters/prodesks/infra/traefik/traefik-config.yaml`
+  - `clusters/prodesks/infra/traefik/routes`
 - Traefik is pinned to VIP:
-  - `192.168.1.50` via the chart-managed `LoadBalancer` service annotations.
+  - `192.168.1.50` via the bundled k3s Traefik service annotations.
 
 Important for k3s:
 - Disable built-in `servicelb` when using MetalLB as the load balancer controller to avoid conflicts.
-- If k3s bundled Traefik is still enabled in the cluster, disable it before relying on the Git-managed Traefik release as the only ingress controller.
 
 ## Sealed Secrets
 
