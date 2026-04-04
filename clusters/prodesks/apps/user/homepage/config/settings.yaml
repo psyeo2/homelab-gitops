@@ -7,7 +7,7 @@ quicklaunch:
 layout:
   Bookmarks:
     style: row
-    columns: 5
+    columns: 6
   Hardware Management:
     style: row
     columns: 3
