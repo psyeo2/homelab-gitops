@@ -6,6 +6,9 @@ metadata:
 spec:
   valuesContent: |-
     service:
+      ipFamilyPolicy: SingleStack
+      ipFamilies:
+        - IPv4
       annotations:
         metallb.io/loadBalancerIPs: 192.168.1.50
         metallb.io/allow-shared-ip: ui-vip
