@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sonarr-config
-  namespace: apps
+  namespace: arr
   annotations:
     argocd.argoproj.io/sync-wave: "16"
 spec:
@@ -17,7 +17,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: radarr-config
-  namespace: apps
+  namespace: arr
   annotations:
     argocd.argoproj.io/sync-wave: "16"
 spec:
@@ -32,7 +32,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: lidarr-config
-  namespace: apps
+  namespace: arr
   annotations:
     argocd.argoproj.io/sync-wave: "16"
 spec:
@@ -47,7 +47,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: bazarr-config
-  namespace: apps
+  namespace: arr
   annotations:
     argocd.argoproj.io/sync-wave: "16"
 spec:
@@ -62,7 +62,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: prowlarr-config
-  namespace: apps
+  namespace: arr
   annotations:
     argocd.argoproj.io/sync-wave: "16"
 spec:
@@ -77,7 +77,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: jellyseerr-config
-  namespace: apps
+  namespace: arr
   annotations:
     argocd.argoproj.io/sync-wave: "16"
 spec:

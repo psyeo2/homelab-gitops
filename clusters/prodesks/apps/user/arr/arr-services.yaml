@@ -15,9 +15,22 @@ spec:
       releaseName: arr-services
       values: |
         controllers:
-          sonarr:
+          main:
+            type: deployment
+            strategy: Recreate
             containers:
               main:
+                image:
+                  repository: lscr.io/linuxserver/prowlarr
+                  tag: latest
+                env:
+                  TZ: Europe/London
+                  PUID: 1000
+                  PGID: 1000
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
+              sonarr:
                 image:
                   repository: lscr.io/linuxserver/sonarr
                   tag: latest
@@ -25,9 +38,10 @@ spec:
                   TZ: Europe/London
                   PUID: 1000
                   PGID: 1000
-          radarr:
-            containers:
-              main:
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
+              radarr:
                 image:
                   repository: lscr.io/linuxserver/radarr
                   tag: latest
@@ -35,9 +49,10 @@ spec:
                   TZ: Europe/London
                   PUID: 1000
                   PGID: 1000
-          lidarr:
-            containers:
-              main:
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
+              lidarr:
                 image:
                   repository: lscr.io/linuxserver/lidarr
                   tag: latest
@@ -45,9 +60,10 @@ spec:
                   TZ: Europe/London
                   PUID: 1000
                   PGID: 1000
-          bazarr:
-            containers:
-              main:
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
+              bazarr:
                 image:
                   repository: lscr.io/linuxserver/bazarr
                   tag: latest
@@ -55,62 +71,91 @@ spec:
                   TZ: Europe/London
                   PUID: 1000
                   PGID: 1000
-          jellyseerr:
-            containers:
-              main:
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
+              jellyseerr:
                 image:
                   repository: ghcr.io/fallenbagel/jellyseerr
                   tag: latest
                 env:
                   TZ: Europe/London
                   LOG_LEVEL: info
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  readOnlyRootFilesystem: false
+              gluetun:
+                image:
+                  repository: qmcgaw/gluetun
+                  tag: v3.40.0
+                env:
+                  TZ: Europe/London
+                  VPN_SERVICE_PROVIDER: mullvad
+                  VPN_TYPE: wireguard
+                  FIREWALL: "on"
+                  FIREWALL_OUTBOUND_SUBNETS: 192.168.1.0/24,10.42.0.0/16,10.43.0.0/16
+                  DOT: "off"
+                  DNS_ADDRESS: 9.9.9.9
+                  DNS_KEEP_NAMESERVER: "off"
+                  IPV6: "off"
+                  SERVER_CITIES: Amsterdam
+                  HEALTH_VPN_DURATION_INITIAL: 120s
+                  WIREGUARD_PRIVATE_KEY:
+                    valueFrom:
+                      secretKeyRef:
+                        name: arr
+                        key: WIREGUARD_MULLVAD_KEY
+                  WIREGUARD_ADDRESSES: 10.74.129.145/32
+                securityContext:
+                  allowPrivilegeEscalation: false
+                  capabilities:
+                    add:
+                      - NET_ADMIN
+                resources:
+                  requests:
+                    cpu: 50m
+                    memory: 128Mi
+                  limits:
+                    memory: 512Mi
         service:
+          prowlarr:
+            controller: main
+            type: ClusterIP
+            ports:
+              http:
+                port: 9696
+                targetPort: 9696
           sonarr:
-            controller: sonarr
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.56
-              metallb.io/allow-shared-ip: arr-stack
+            controller: main
+            type: ClusterIP
             ports:
               http:
                 port: 8989
                 targetPort: 8989
           radarr:
-            controller: radarr
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.56
-              metallb.io/allow-shared-ip: arr-stack
+            controller: main
+            type: ClusterIP
             ports:
               http:
                 port: 7878
                 targetPort: 7878
           lidarr:
-            controller: lidarr
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.56
-              metallb.io/allow-shared-ip: arr-stack
+            controller: main
+            type: ClusterIP
             ports:
               http:
                 port: 8686
                 targetPort: 8686
           bazarr:
-            controller: bazarr
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.56
-              metallb.io/allow-shared-ip: arr-stack
+            controller: main
+            type: ClusterIP
             ports:
               http:
                 port: 6767
                 targetPort: 6767
           jellyseerr:
-            controller: jellyseerr
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.56
-              metallb.io/allow-shared-ip: arr-stack
+            controller: main
+            type: ClusterIP
             ports:
               http:
                 port: 5055
@@ -122,49 +167,66 @@ spec:
             existingClaim: jellyfin-media
             globalMounts:
               - path: /data
+          prowlarr-config:
+            enabled: true
+            type: persistentVolumeClaim
+            existingClaim: prowlarr-config
+            advancedMounts:
+              main:
+                main:
+                  - path: /config
           sonarr-config:
             enabled: true
             type: persistentVolumeClaim
             existingClaim: sonarr-config
             advancedMounts:
-              sonarr:
-                main:
+              main:
+                sonarr:
                   - path: /config
           radarr-config:
             enabled: true
             type: persistentVolumeClaim
             existingClaim: radarr-config
             advancedMounts:
-              radarr:
-                main:
+              main:
+                radarr:
                   - path: /config
           lidarr-config:
             enabled: true
             type: persistentVolumeClaim
             existingClaim: lidarr-config
             advancedMounts:
-              lidarr:
-                main:
+              main:
+                lidarr:
                   - path: /config
           bazarr-config:
             enabled: true
             type: persistentVolumeClaim
             existingClaim: bazarr-config
             advancedMounts:
-              bazarr:
-                main:
+              main:
+                bazarr:
                   - path: /config
           jellyseerr-config:
             enabled: true
             type: persistentVolumeClaim
             existingClaim: jellyseerr-config
             advancedMounts:
-              jellyseerr:
-                main:
+              main:
+                jellyseerr:
                   - path: /app/config
+          tun:
+            enabled: true
+            type: hostPath
+            hostPath: /dev/net/tun
+            hostPathType: CharDevice
+            advancedMounts:
+              main:
+                gluetun:
+                  - path: /dev/net/tun
   destination:
     name: in-cluster
-    namespace: apps
+    namespace: arr
   syncPolicy:
     automated:
       prune: true

@@ -32,17 +32,6 @@ spec:
                 securityContext:
                   allowPrivilegeEscalation: false
                   readOnlyRootFilesystem: false
-              prowlarr:
-                image:
-                  repository: lscr.io/linuxserver/prowlarr
-                  tag: latest
-                env:
-                  TZ: Europe/London
-                  PUID: 1000
-                  PGID: 1000
-                securityContext:
-                  allowPrivilegeEscalation: false
-                  readOnlyRootFilesystem: false
               gluetun:
                 image:
                   repository: qmcgaw/gluetun
@@ -80,13 +69,17 @@ spec:
         service:
           main:
             controller: main
-            type: LoadBalancer
-            annotations:
-              metallb.io/loadBalancerIPs: 192.168.1.55
+            type: ClusterIP
             ports:
               webui:
                 port: 8080
                 targetPort: 8080
+          torrent:
+            controller: main
+            type: LoadBalancer
+            annotations:
+              metallb.io/loadBalancerIPs: 192.168.1.55
+            ports:
               bittorrent-tcp:
                 enabled: true
                 port: 6881
@@ -97,11 +90,6 @@ spec:
                 port: 6881
                 targetPort: 6881
                 protocol: UDP
-              prowlarr:
-                enabled: true
-                port: 9696
-                targetPort: 9696
-                protocol: TCP
         persistence:
           config:
             enabled: true
@@ -117,14 +105,6 @@ spec:
             existingClaim: jellyfin-media
             globalMounts:
               - path: /data
-          prowlarr-config:
-            enabled: true
-            type: persistentVolumeClaim
-            existingClaim: prowlarr-config
-            advancedMounts:
-              main:
-                prowlarr:
-                  - path: /config
           tun:
             enabled: true
             type: hostPath
@@ -136,7 +116,7 @@ spec:
                   - path: /dev/net/tun
   destination:
     name: in-cluster
-    namespace: apps
+    namespace: arr
   syncPolicy:
     automated:
       prune: true

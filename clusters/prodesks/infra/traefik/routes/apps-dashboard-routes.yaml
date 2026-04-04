@@ -134,7 +134,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sonarr
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -156,7 +156,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: radarr
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -178,7 +178,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: lidarr
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -200,7 +200,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bazarr
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -222,7 +222,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: jellyseerr
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -244,7 +244,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: qbittorrent
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -266,7 +266,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: prowlarr
-  namespace: apps
+  namespace: arr
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
     traefik.ingress.kubernetes.io/router.tls: "true"
@@ -280,6 +280,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: arr-qbittorrent
+                name: arr-services-prowlarr
                 port:
                   number: 9696
