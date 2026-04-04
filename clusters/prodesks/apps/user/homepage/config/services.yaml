@@ -17,7 +17,7 @@
         description: Router management
     - Grafana:
         icon: grafana.png
-        href: http://192.168.1.50:3000
+        href: https://grafana.home.arpa
         description: Metrics dashboards
     - Longhorn:
         icon: longhorn.png
@@ -26,12 +26,12 @@
 - Platform Services:
     - Harbor:
         icon: kubernetes.png
-        href: http://192.168.1.57
+        href: https://harbor.home.arpa
         description: Container registry
 - Media Services:
     - Immich:
         icon: immich.png
-        href: http://192.168.1.54:2283
+        href: https://immich.home.arpa
         description: Photo and video library
     - Jellyfin:
         icon: jellyfin.png
@@ -39,16 +39,16 @@
         description: Media server
     - Jellyseerr:
         icon: jellyseerr.png
-        href: http://192.168.1.56:5055
+        href: https://jellyseerr.home.arpa
         description: Media request manager
     - Kiwix:
         icon: wikipedia.png
-        href: http://192.168.1.50:8082
+        href: https://kiwix.home.arpa
         description: Offline ZIM library
 - Home Automation:
     - Home Assistant:
         icon: home-assistant.png
-        href: http://192.168.1.50:8123
+        href: https://home-assistant.home.arpa
         description: Smart home automation
 - Game Servers:
     - CraftyController:
@@ -62,30 +62,30 @@
 - Networking:
     - WireGuard:
         icon: wireguard.png
-        href: http://192.168.1.51:51821
+        href: https://wireguard.home.arpa
         description: VPN administration
 - ARR Services:
     - qBittorrent:
         icon: qbittorrent.png
-        href: http://192.168.1.55:8080
+        href: https://qbittorrent.home.arpa
         description: Torrent client, VPN routed
     - Prowlarr:
         icon: prowlarr.png
-        href: http://192.168.1.55:9696
+        href: https://prowlarr.home.arpa
         description: Indexer manager, VPN routed
     - Sonarr:
         icon: sonarr.png
-        href: http://192.168.1.56:8989
+        href: https://sonarr.home.arpa
         description: TV automation
     - Radarr:
         icon: radarr.png
-        href: http://192.168.1.56:7878
+        href: https://radarr.home.arpa
         description: Movie automation
     - Lidarr:
         icon: lidarr.png
-        href: http://192.168.1.56:8686
+        href: https://lidarr.home.arpa
         description: Music automation
     - Bazarr:
         icon: bazarr.png
-        href: http://192.168.1.56:6767
+        href: https://bazarr.home.arpa
         description: Subtitle automation

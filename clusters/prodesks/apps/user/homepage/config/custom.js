@@ -6,20 +6,21 @@
   ]);
 
   const k3sServices = new Set([
-    "http://192.168.1.54:2283",
-    "http://192.168.1.56:5055",
-    "http://192.168.1.50:8082",
     "http://192.168.1.50:8080",
-    "http://192.168.1.50:3000",
     "http://192.168.1.50:8081",
-    "http://192.168.1.50:8123",
-    "http://192.168.1.51:51821",
-    "http://192.168.1.55:8080",
-    "http://192.168.1.55:9696",
-    "http://192.168.1.56:8989",
-    "http://192.168.1.56:7878",
-    "http://192.168.1.56:8686",
-    "http://192.168.1.56:6767",
+    "https://grafana.home.arpa",
+    "https://harbor.home.arpa",
+    "https://immich.home.arpa",
+    "https://jellyseerr.home.arpa",
+    "https://kiwix.home.arpa",
+    "https://home-assistant.home.arpa",
+    "https://wireguard.home.arpa",
+    "https://qbittorrent.home.arpa",
+    "https://prowlarr.home.arpa",
+    "https://sonarr.home.arpa",
+    "https://radarr.home.arpa",
+    "https://lidarr.home.arpa",
+    "https://bazarr.home.arpa",
   ]);
 
   const ubuntuSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
