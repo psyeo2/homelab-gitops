@@ -15,6 +15,10 @@
         icon: router.png
         href: https://192.168.1.254
         description: Router management
+    - Pi-hole:
+        icon: pi-hole.png
+        href: http://pihole.home.arpa/admin
+        description: DNS and ad-blocking
     - Grafana:
         icon: grafana.png
         href: https://grafana.home.arpa
