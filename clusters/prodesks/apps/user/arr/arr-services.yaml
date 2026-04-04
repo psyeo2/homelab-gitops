@@ -95,8 +95,7 @@ spec:
                   FIREWALL: "on"
                   FIREWALL_OUTBOUND_SUBNETS: 192.168.1.0/24,10.42.0.0/16,10.43.0.0/16
                   DOT: "off"
-                  DNS_ADDRESS: 9.9.9.9
-                  DNS_KEEP_NAMESERVER: "off"
+                  DNS_KEEP_NAMESERVER: "on"
                   IPV6: "off"
                   SERVER_CITIES: Amsterdam
                   HEALTH_VPN_DURATION_INITIAL: 120s
